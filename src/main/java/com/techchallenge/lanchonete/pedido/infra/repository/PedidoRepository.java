@@ -1,4 +1,4 @@
-package com.techchallenge.lanchonete.pedido.domain.repository;
+package com.techchallenge.lanchonete.pedido.infra.repository;
 
 import com.techchallenge.lanchonete.pedido.domain.entity.Pedido;
 import com.techchallenge.lanchonete.pedido.port.repository.PedidoRepositoryPort;

@@ -1,4 +1,4 @@
-package com.techchallenge.lanchonete.produto.domain.repository;
+package com.techchallenge.lanchonete.produto.infra.repository;
 
 import com.techchallenge.lanchonete.produto.domain.entity.Produto;
 import com.techchallenge.lanchonete.produto.port.repository.ProdutoRepositoryPort;

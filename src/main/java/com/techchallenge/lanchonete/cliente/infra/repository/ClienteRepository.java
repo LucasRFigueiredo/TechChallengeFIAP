@@ -1,4 +1,4 @@
-package com.techchallenge.lanchonete.cliente.domain.repository;
+package com.techchallenge.lanchonete.cliente.infra.repository;
 
 import com.techchallenge.lanchonete.cliente.domain.entity.Cliente;
 import com.techchallenge.lanchonete.cliente.port.repository.ClienteRepositoryPort;
