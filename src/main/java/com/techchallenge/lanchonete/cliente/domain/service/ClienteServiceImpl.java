@@ -13,8 +13,13 @@ public class ClienteServiceImpl implements ClienteServicePort {
     private final ClienteMapper clienteMapper;
 
     @Override
-    public void criarPessoa(ClienteDTO clienteDTO) {
-        Cliente cliente = clienteMapper.pessoaDTOToPessoa(clienteDTO);
+    public void criarCliente(ClienteDTO clienteDTO) {
+        Cliente cliente = clienteMapper.clienteDTOToCliente(clienteDTO);
         this.clienteRepository.salvar(cliente);
+    }
+
+    @Override
+    public ClienteDTO buscarCliente(String cpf) {
+        return clienteMapper.clienteToClienteDTO(this.clienteRepository.buscar(cpf));
     }
 }

@@ -4,6 +4,6 @@ import com.techchallenge.lanchonete.cliente.domain.dto.ClienteDTO;
 
 public interface ClienteServicePort {
 
-    void criarPessoa(ClienteDTO clienteDTO);
-    //PessoaDTO buscarPessoa(String cpf) throws notfoundex;
+    void criarCliente(ClienteDTO clienteDTO);
+    ClienteDTO buscarCliente(String cpf);
 }
