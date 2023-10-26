@@ -16,10 +16,10 @@ import java.util.Optional;
 
 @AllArgsConstructor
 public class PedidoServiceImpl implements PedidoServicePort {
+    private final PedidoMapper pedidoMapper;
     private final PedidoRepositoryPort pedidoRepository;
     private final ClienteRepositoryPort clienteRepositoryPort;
     private final ProdutoRepositoryPort produtoRepositoryPort;
-    private final PedidoMapper pedidoMapper;
 
     @Override
     public void criar(PedidoDTO pedidoDTO) {
