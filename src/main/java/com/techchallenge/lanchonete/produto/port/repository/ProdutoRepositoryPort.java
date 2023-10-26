@@ -7,5 +7,7 @@ public interface ProdutoRepositoryPort {
 
     void editar(Produto produto);
 
+    void buscar(Long id);
+
     void remover(Long id);
 }

@@ -36,6 +36,13 @@ public class ProdutoRepository implements ProdutoRepositoryPort {
     }
 
     @Override
+    public void buscar(Long id) {
+        if (Objects.isNull(springProdutoRepository.findById(id).get())) {
+            throw new RuntimeException("Produto inexistente, realize o cadastro com o criar");
+        }
+    }
+
+    @Override
     public void remover(Long id) {
         springProdutoRepository.deleteById(id);
     }
