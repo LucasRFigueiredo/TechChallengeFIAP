@@ -7,6 +7,8 @@ import com.techchallenge.lanchonete.pedido.port.interfaces.PedidoServicePort;
 import com.techchallenge.lanchonete.pedido.port.repository.PedidoRepositoryPort;
 import lombok.AllArgsConstructor;
 
+import java.util.List;
+
 @AllArgsConstructor
 public class PedidoServiceImpl implements PedidoServicePort {
     private final PedidoRepositoryPort pedidoRepository;
@@ -16,5 +18,11 @@ public class PedidoServiceImpl implements PedidoServicePort {
     public void criarPedido(PedidoDTO pedidoDTO) {
         Pedido pedido = pedidoMapper.pedidoDTOToPedido(pedidoDTO);
         this.pedidoRepository.salvar(pedido);
+    }
+
+    @Override
+    public List<PedidoDTO> listarPedido() {
+        List<Pedido> pedidos = this.pedidoRepository.listarPedido();
+        return pedidoMapper.pedidosToPedidoDTOs(pedidos);
     }
 }

@@ -12,5 +12,6 @@ import java.util.List;
 public class PedidoDTO {
     private Long id;
     private String cliente;
+    private String status;
     private List<String> itens;
 }

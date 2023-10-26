@@ -12,13 +12,13 @@ public class ClienteController {
     private final ClienteServicePort clienteServicePort;
 
     @PostMapping
-    void criarCliente(@RequestBody ClienteDTO clienteDTO){
-        clienteServicePort.criarCliente(clienteDTO);
+    void criarCliente(@RequestBody ClienteDTO clienteDTO) {
+        clienteServicePort.salvar(clienteDTO);
     }
 
     @GetMapping
-    ClienteDTO buscarCliente(@PathVariable String cpf){
-        return clienteServicePort.buscarCliente(cpf);
+    ClienteDTO buscarCliente(@PathVariable String cpf) {
+        return clienteServicePort.buscar(cpf);
     }
 
 }

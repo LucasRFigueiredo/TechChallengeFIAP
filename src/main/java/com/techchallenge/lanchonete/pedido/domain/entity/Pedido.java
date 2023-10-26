@@ -14,5 +14,6 @@ import java.util.List;
 public class Pedido {
     private Long id;
     private String cliente;
+    private String status;
     private List<String> itens;
 }
