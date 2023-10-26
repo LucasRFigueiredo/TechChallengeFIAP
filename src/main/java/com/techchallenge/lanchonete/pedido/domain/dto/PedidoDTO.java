@@ -1,5 +1,7 @@
 package com.techchallenge.lanchonete.pedido.domain.dto;
 
+import com.techchallenge.lanchonete.cliente.domain.dto.ClienteDTO;
+import com.techchallenge.lanchonete.produto.domain.Dto.ProdutoDto;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
@@ -11,7 +13,7 @@ import java.util.List;
 @AllArgsConstructor
 public class PedidoDTO {
     private Long id;
-    private String cliente;
+    private ClienteDTO cliente;
     private String status;
-    private List<String> itens;
+    private List<ProdutoDto> itens;
 }

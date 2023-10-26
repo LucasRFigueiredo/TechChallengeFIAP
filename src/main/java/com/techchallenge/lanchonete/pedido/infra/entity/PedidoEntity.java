@@ -1,6 +1,8 @@
 package com.techchallenge.lanchonete.pedido.infra.entity;
 
+import com.techchallenge.lanchonete.cliente.infra.entity.ClienteEntity;
 import com.techchallenge.lanchonete.pedido.domain.entity.Pedido;
+import com.techchallenge.lanchonete.produto.infra.entity.ProdutoEntity;
 import jakarta.persistence.*;
 
 import java.util.List;
@@ -11,13 +13,13 @@ public class PedidoEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    private String cliente;
+    private ClienteEntity cliente;
     private String status;
-    private List<String> itens;
+    private List<ProdutoEntity> itens;
 
     public PedidoEntity() {
     }
-
+    //TODO fazer mappers separados dessa parte
     public PedidoEntity(Pedido pedido) {
         this.id = pedido.getId();
         this.cliente = pedido.getCliente();
