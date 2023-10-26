@@ -4,7 +4,7 @@ import com.techchallenge.lanchonete.cliente.domain.dto.ClienteDTO;
 
 public interface ClienteServicePort {
 
-    void salvar(ClienteDTO clienteDTO);
+    void criar(ClienteDTO clienteDTO);
 
     ClienteDTO buscar(String cpf);
 }

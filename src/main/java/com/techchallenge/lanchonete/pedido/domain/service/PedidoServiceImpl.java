@@ -15,13 +15,13 @@ public class PedidoServiceImpl implements PedidoServicePort {
     private final PedidoMapper pedidoMapper;
 
     @Override
-    public void criarPedido(PedidoDTO pedidoDTO) {
+    public void criar(PedidoDTO pedidoDTO) {
         Pedido pedido = pedidoMapper.pedidoDTOToPedido(pedidoDTO);
         this.pedidoRepository.salvar(pedido);
     }
 
     @Override
-    public List<PedidoDTO> listarPedido() {
+    public List<PedidoDTO> listar() {
         List<Pedido> pedidos = this.pedidoRepository.listarPedido();
         return pedidoMapper.pedidosToPedidoDTOs(pedidos);
     }

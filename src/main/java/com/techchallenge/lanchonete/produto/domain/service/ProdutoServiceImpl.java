@@ -13,8 +13,19 @@ public class ProdutoServiceImpl implements ProdutoServicePort {
     private final ProdutoMapper produtoMapper;
 
     @Override
-    public void criarProduto(ProdutoDto produtoDto) {
+    public void criar(ProdutoDto produtoDto) {
         Produto produto = produtoMapper.produtoDTOToProduto(produtoDto);
         this.produtoRepository.salvar(produto);
+    }
+
+    @Override
+    public void editar(ProdutoDto produtoDto) {
+        Produto produto = produtoMapper.produtoDTOToProduto(produtoDto);
+        this.produtoRepository.editar(produto);
+    }
+
+    @Override
+    public void remover(Long id) {
+        this.produtoRepository.remover(id);
     }
 }

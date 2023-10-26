@@ -13,7 +13,7 @@ public class ClienteServiceImpl implements ClienteServicePort {
     private final ClienteMapper clienteMapper;
 
     @Override
-    public void salvar(ClienteDTO clienteDTO) {
+    public void criar(ClienteDTO clienteDTO) {
         Cliente cliente = clienteMapper.clienteDTOToCliente(clienteDTO);
         this.clienteRepository.salvar(cliente);
     }

@@ -13,7 +13,7 @@ public class ClienteController {
 
     @PostMapping
     void criarCliente(@RequestBody ClienteDTO clienteDTO) {
-        clienteServicePort.salvar(clienteDTO);
+        clienteServicePort.criar(clienteDTO);
     }
 
     @GetMapping

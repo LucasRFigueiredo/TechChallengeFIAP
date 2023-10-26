@@ -10,6 +10,7 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 public class Produto {
+    private Long Id;
     private String tipo;
     private String nome;
     private String descricao;

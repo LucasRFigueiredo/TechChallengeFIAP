@@ -8,6 +8,7 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 public class ProdutoDto {
+    private Long Id;
     private String tipo;
     private String nome;
     private String descricao;

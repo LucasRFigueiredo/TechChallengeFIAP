@@ -15,11 +15,11 @@ public class PedidoController {
 
     @PostMapping
     void criarPedido(@RequestBody PedidoDTO pedidoDTO) {
-        pedidoServicePort.criarPedido(pedidoDTO);
+        pedidoServicePort.criar(pedidoDTO);
     }
 
     @GetMapping
     List<PedidoDTO> listaProdutos() {
-        return pedidoServicePort.listarPedido();
+        return pedidoServicePort.listar();
     }
 }
