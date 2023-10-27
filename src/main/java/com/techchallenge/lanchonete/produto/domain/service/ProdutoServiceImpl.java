@@ -1,6 +1,6 @@
 package com.techchallenge.lanchonete.produto.domain.service;
 
-import com.techchallenge.lanchonete.produto.domain.Dto.ProdutoDto;
+import com.techchallenge.lanchonete.produto.domain.Dto.ProdutoDTO;
 import com.techchallenge.lanchonete.produto.domain.entity.Produto;
 import com.techchallenge.lanchonete.produto.domain.mapper.ProdutoMapper;
 import com.techchallenge.lanchonete.produto.port.interfaces.ProdutoServicePort;
@@ -13,13 +13,13 @@ public class ProdutoServiceImpl implements ProdutoServicePort {
     private final ProdutoMapper produtoMapper;
 
     @Override
-    public void criar(ProdutoDto produtoDto) {
+    public void criar(ProdutoDTO produtoDto) {
         Produto produto = produtoMapper.produtoDTOToProduto(produtoDto);
         this.produtoRepository.salvar(produto);
     }
 
     @Override
-    public void editar(ProdutoDto produtoDto) {
+    public void editar(ProdutoDTO produtoDto) {
         Produto produto = produtoMapper.produtoDTOToProduto(produtoDto);
         this.produtoRepository.editar(produto);
     }

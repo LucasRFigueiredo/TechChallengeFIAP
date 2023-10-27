@@ -18,7 +18,7 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
-@ComponentScan(basePackageClasses = LanchoneteApplication.class)
+@ComponentScan(basePackageClasses = LanchoneteApplication.class, basePackages = {"com.techchallenge.lanchonete.cliente.domain.mapper", "com.techchallenge.lanchonete.pedido.domain.mapper", "com.techchallenge.lanchonete.produto.domain.mapper"})
 public class BeanConfiguration {
     @Bean
     ClienteServicePort clienteServicePort(ClienteRepositoryPort clienteRepositoryPort, ClienteMapper clienteMapper) {

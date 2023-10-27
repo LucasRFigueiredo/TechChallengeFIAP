@@ -1,6 +1,7 @@
 package com.techchallenge.lanchonete.produto.infra.repository;
 
 import com.techchallenge.lanchonete.produto.domain.entity.Produto;
+import com.techchallenge.lanchonete.produto.domain.mapper.ProdutoEntityMapper;
 import com.techchallenge.lanchonete.produto.infra.entity.ProdutoEntity;
 import com.techchallenge.lanchonete.produto.port.repository.ProdutoRepositoryPort;
 import lombok.RequiredArgsConstructor;
@@ -12,12 +13,13 @@ import java.util.Objects;
 @RequiredArgsConstructor
 public class ProdutoRepository implements ProdutoRepositoryPort {
     private final SpringProdutoRepository springProdutoRepository;
+    private final ProdutoEntityMapper produtoEntityMapper;
 
     @Override
     public void salvar(Produto produto) {
         ProdutoEntity produtoById = springProdutoRepository.findById(produto.getId()).get();
         if (Objects.isNull(produtoById)) {
-            ProdutoEntity produtoEntity = new ProdutoEntity(produto);
+            ProdutoEntity produtoEntity = produtoEntityMapper.produtoToProdutoEntity(produto);
             this.springProdutoRepository.save(produtoEntity);
         } else {
             throw new RuntimeException("Produto existente, uso o editar");
@@ -28,7 +30,7 @@ public class ProdutoRepository implements ProdutoRepositoryPort {
     public void editar(Produto produto) {
         ProdutoEntity produtoById = springProdutoRepository.findById(produto.getId()).get();
         if (!Objects.isNull(produtoById)) {
-            produtoById.atualizar(produto);
+            produtoById = produtoEntityMapper.produtoToProdutoEntity(produto);
             this.springProdutoRepository.save(produtoById);
         } else {
             throw new RuntimeException("Produto inexistente, realize o cadastro com o criar");

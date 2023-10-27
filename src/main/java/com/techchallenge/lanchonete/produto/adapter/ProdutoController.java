@@ -1,6 +1,6 @@
 package com.techchallenge.lanchonete.produto.adapter;
 
-import com.techchallenge.lanchonete.produto.domain.Dto.ProdutoDto;
+import com.techchallenge.lanchonete.produto.domain.Dto.ProdutoDTO;
 import com.techchallenge.lanchonete.produto.port.interfaces.ProdutoServicePort;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
@@ -12,12 +12,12 @@ public class ProdutoController {
     private final ProdutoServicePort produtoServicePort;
 
     @PostMapping
-    void criarProduto(@RequestBody ProdutoDto produtoDto) {
+    void criarProduto(@RequestBody ProdutoDTO produtoDto) {
         produtoServicePort.criar(produtoDto);
     }
 
     @PutMapping
-    void editarProduto(@RequestBody ProdutoDto produtoDto) {
+    void editarProduto(@RequestBody ProdutoDTO produtoDto) {
         produtoServicePort.editar(produtoDto);
     }
 

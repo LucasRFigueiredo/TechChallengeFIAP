@@ -1,10 +1,20 @@
 package com.techchallenge.lanchonete.produto.infra.entity;
 
-import com.techchallenge.lanchonete.produto.domain.entity.Produto;
+import com.techchallenge.lanchonete.pedido.infra.entity.PedidoEntity;
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
+import java.util.List;
 
 @Entity
-@Table(name = "produtos")
+@Table(name = "Produto")
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
 public class ProdutoEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -14,7 +24,10 @@ public class ProdutoEntity {
     private String descricao;
     private Double preco;
 
-    public ProdutoEntity(Produto produto) {
+    @ManyToMany(mappedBy = "produtos")
+    private List<PedidoEntity> pedidos;
+
+    /*public ProdutoEntity(Produto produto) {
         this.Id = produto.getId();
         this.tipo = produto.getTipo();
         this.nome = produto.getNome();
@@ -33,5 +46,5 @@ public class ProdutoEntity {
 
     public Produto toProduto() {
         return new Produto(this.Id, this.tipo, this.nome, this.descricao, this.preco);
-    }
+    }*/
 }

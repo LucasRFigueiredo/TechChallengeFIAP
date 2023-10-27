@@ -1,11 +1,11 @@
 package com.techchallenge.lanchonete.produto.port.interfaces;
 
-import com.techchallenge.lanchonete.produto.domain.Dto.ProdutoDto;
+import com.techchallenge.lanchonete.produto.domain.Dto.ProdutoDTO;
 
 public interface ProdutoServicePort {
-    void criar(ProdutoDto produtoDto);
+    void criar(ProdutoDTO produtoDto);
 
-    void editar(ProdutoDto produtoDto);
+    void editar(ProdutoDTO produtoDto);
 
     void remover(Long id);
 }

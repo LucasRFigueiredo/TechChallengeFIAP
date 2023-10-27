@@ -10,6 +10,7 @@ import com.techchallenge.lanchonete.produto.domain.entity.Produto;
 import com.techchallenge.lanchonete.produto.port.repository.ProdutoRepositoryPort;
 import lombok.AllArgsConstructor;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
@@ -38,6 +39,15 @@ public class PedidoServiceImpl implements PedidoServicePort {
     @Override
     public List<PedidoDTO> listar() {
         List<Pedido> pedidos = this.pedidoRepository.listarPedido();
-        return pedidoMapper.pedidosToPedidoDTOs(pedidos);
+        if (!pedidos.isEmpty()) {
+            List<PedidoDTO> pedidoDTOS = new ArrayList<>();
+            for (Pedido pedido : pedidos) {
+                PedidoDTO pedidoDTO = pedidoMapper.pedidoToPedidoDTO(pedido);
+                pedidoDTOS.add(pedidoDTO);
+            }
+            return pedidoDTOS;
+        } else {
+            return Collections.emptyList();
+        }
     }
 }

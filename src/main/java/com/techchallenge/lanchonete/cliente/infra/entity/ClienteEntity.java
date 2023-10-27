@@ -1,25 +1,32 @@
 package com.techchallenge.lanchonete.cliente.infra.entity;
 
 
-import com.techchallenge.lanchonete.cliente.domain.entity.Cliente;
+import com.techchallenge.lanchonete.pedido.infra.entity.PedidoEntity;
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
-import java.util.UUID;
+import java.util.List;
 
 @Entity
-@Table(name = "clientes")
+@Table(name = "Cliente")
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
 public class ClienteEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private UUID id;
+    private Long id;
     private String nome;
     private String cpf;
     private String email;
+    @OneToMany(mappedBy = "cliente", cascade = CascadeType.ALL)
+    private List<PedidoEntity> pedidos;
 
-    public ClienteEntity(){
-    }
-
-    public ClienteEntity(Cliente cliente){
+    /*public ClienteEntity(Cliente cliente){
         this.nome = cliente.getNome();
         this.cpf = cliente.getCpf();
         this.email = cliente.getEmail();
@@ -33,5 +40,5 @@ public class ClienteEntity {
 
     public Cliente toCliente(){
         return new Cliente(this.id, this.nome, this.cpf, this.email);
-    }
+    }*/
 }
