@@ -4,6 +4,7 @@ import com.techchallenge.lanchonete.pedido.domain.entity.Pedido;
 import com.techchallenge.lanchonete.pedido.domain.mapper.PedidoEntityMapper;
 import com.techchallenge.lanchonete.pedido.infra.entity.PedidoEntity;
 import com.techchallenge.lanchonete.pedido.port.repository.PedidoRepositoryPort;
+import jakarta.persistence.EntityManager;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
@@ -18,6 +19,7 @@ public class PedidoRepository implements PedidoRepositoryPort {
 
     private final SpringPedidoRepository springPedidoRepository;
     private final PedidoEntityMapper pedidoEntityMapper;
+    private final EntityManager entityManager;
 
     @Override
     public void salvar(Pedido pedido) {
@@ -28,6 +30,7 @@ public class PedidoRepository implements PedidoRepositoryPort {
             pedidoEntity = this.springPedidoRepository.findById(pedido.getId()).get();
             pedidoEntity = pedidoEntityMapper.pedidoToPedidoEntity(pedido);
         }
+        pedidoEntity = entityManager.merge(pedidoEntity);
         this.springPedidoRepository.save(pedidoEntity);
     }
 

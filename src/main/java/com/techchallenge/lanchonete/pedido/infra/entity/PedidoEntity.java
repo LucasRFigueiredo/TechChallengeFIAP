@@ -18,9 +18,10 @@ import java.util.List;
 @NoArgsConstructor
 public class PedidoEntity {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "ped_seq_gen")
+    @SequenceGenerator(name = "ped_seq_gen", sequenceName = "pedido_seq", allocationSize = 1)
     private Long id;
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name = "Cliente_id")
     private ClienteEntity cliente;
     private String status;
@@ -30,17 +31,4 @@ public class PedidoEntity {
             joinColumns = @JoinColumn(name = "Pedido_id"),
             inverseJoinColumns = @JoinColumn(name = "Produto_id"))
     private List<ProdutoEntity> produtos;
-
-    //TODO fazer mappers separados dessa parte
-
-    /*public void atualizar(Pedido pedido) {
-        this.id = pedido.getId();
-        this.cliente = pedido.getCliente();
-        this.status = pedido.getStatus();
-        this.itens = pedido.getItens();
-    }*/
-
-    /*public Pedido toPedido() {
-        return new Pedido(this.id, this.cliente, this.status, this.itens);
-    }*/
 }
