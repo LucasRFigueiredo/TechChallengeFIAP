@@ -21,7 +21,7 @@ public class ProdutoController {
         produtoServicePort.editar(produtoDto);
     }
 
-    @DeleteMapping
+    @DeleteMapping(value = "/{id}")
     void removerProduto(@PathVariable Long id) {
         produtoServicePort.remover(id);
     }

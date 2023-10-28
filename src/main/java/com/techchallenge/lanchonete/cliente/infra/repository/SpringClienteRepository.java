@@ -9,5 +9,5 @@ import java.util.UUID;
 
 @Repository
 public interface SpringClienteRepository extends JpaRepository<ClienteEntity, UUID> {
-    Optional<ClienteEntity> findByCpf(String cpf);
+    ClienteEntity findByCpf(String cpf);
 }

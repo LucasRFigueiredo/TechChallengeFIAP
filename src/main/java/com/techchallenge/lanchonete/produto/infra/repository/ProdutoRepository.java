@@ -8,6 +8,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
 import java.util.Objects;
+import java.util.Optional;
 
 @Component
 @RequiredArgsConstructor
@@ -17,13 +18,8 @@ public class ProdutoRepository implements ProdutoRepositoryPort {
 
     @Override
     public void salvar(Produto produto) {
-        ProdutoEntity produtoById = springProdutoRepository.findById(produto.getId()).get();
-        if (Objects.isNull(produtoById)) {
-            ProdutoEntity produtoEntity = produtoEntityMapper.produtoToProdutoEntity(produto);
-            this.springProdutoRepository.save(produtoEntity);
-        } else {
-            throw new RuntimeException("Produto existente, uso o editar");
-        }
+        ProdutoEntity produtoEntity = produtoEntityMapper.produtoToProdutoEntity(produto);
+        this.springProdutoRepository.save(produtoEntity);
     }
 
     @Override
@@ -39,7 +35,7 @@ public class ProdutoRepository implements ProdutoRepositoryPort {
 
     @Override
     public void buscar(Long id) {
-        if (Objects.isNull(springProdutoRepository.findById(id).get())) {
+        if (Objects.isNull(springProdutoRepository.findById(id))) {
             throw new RuntimeException("Produto inexistente, realize o cadastro com o criar");
         }
     }

@@ -16,7 +16,7 @@ public class ClienteController {
         clienteServicePort.criar(clienteDTO);
     }
 
-    @GetMapping
+    @GetMapping(value = "/{cpf}")
     ClienteDTO buscarCliente(@PathVariable String cpf) {
         return clienteServicePort.buscar(cpf);
     }

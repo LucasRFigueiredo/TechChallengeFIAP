@@ -23,7 +23,7 @@ public class ClienteRepository implements ClienteRepositoryPort {
         if (Objects.isNull(cliente.getCpf())) {
             clienteEntity = clienteEntityMapper.clienteToClienteEntity(cliente);
         } else {
-            clienteEntity = this.springClienteRepository.findByCpf(cliente.getCpf()).get();
+            clienteEntity = this.springClienteRepository.findByCpf(cliente.getCpf());
             clienteEntity = clienteEntityMapper.clienteToClienteEntity(cliente);
         }
         this.springClienteRepository.save(clienteEntity);
@@ -31,9 +31,9 @@ public class ClienteRepository implements ClienteRepositoryPort {
 
     @Override
     public Cliente buscar(String cpf) {
-        Optional<ClienteEntity> clienteEntity = this.springClienteRepository.findByCpf(cpf);
-        if (clienteEntity.isPresent()) {
-            return clienteEntityMapper.clienteEntityToCliente(clienteEntity.get());
+        ClienteEntity clienteEntity = this.springClienteRepository.findByCpf(cpf);
+        if (clienteEntity != null) {
+            return clienteEntityMapper.clienteEntityToCliente(clienteEntity);
         }
         throw new RuntimeException("Cliente não existe");
     }
