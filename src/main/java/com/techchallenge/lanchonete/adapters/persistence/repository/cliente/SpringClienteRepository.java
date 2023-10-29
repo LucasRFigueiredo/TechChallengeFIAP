@@ -4,9 +4,7 @@ import com.techchallenge.lanchonete.adapters.persistence.entity.ClienteEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import java.util.UUID;
-
 @Repository
-public interface SpringClienteRepository extends JpaRepository<ClienteEntity, UUID> {
+public interface SpringClienteRepository extends JpaRepository<ClienteEntity, Long> {
     ClienteEntity findByCpf(String cpf);
 }
