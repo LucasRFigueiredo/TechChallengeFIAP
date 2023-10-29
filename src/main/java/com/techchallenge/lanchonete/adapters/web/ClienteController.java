@@ -7,7 +7,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("Clientes")
+@RequestMapping("clientes")
 @RequiredArgsConstructor
 public class ClienteController {
     private final CriarClienteUseCase criarClienteUseCase;

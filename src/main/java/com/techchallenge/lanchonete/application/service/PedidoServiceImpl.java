@@ -2,8 +2,11 @@ package com.techchallenge.lanchonete.application.service;
 
 import com.techchallenge.lanchonete.application.domain.Pedido;
 import com.techchallenge.lanchonete.application.domain.Produto;
+import com.techchallenge.lanchonete.application.dto.CheckoutDTO;
 import com.techchallenge.lanchonete.application.dto.PedidoDTO;
+import com.techchallenge.lanchonete.application.dto.ProdutoDTO;
 import com.techchallenge.lanchonete.application.mapper.pedido.PedidoMapper;
+import com.techchallenge.lanchonete.application.port.incoming.checkout.CheckoutUseCase;
 import com.techchallenge.lanchonete.application.port.incoming.pedido.CriarPedidoUseCase;
 import com.techchallenge.lanchonete.application.port.incoming.pedido.ListarPedidoUseCase;
 import com.techchallenge.lanchonete.application.port.outgoing.ClienteRepositoryPort;
@@ -12,17 +15,19 @@ import com.techchallenge.lanchonete.application.port.outgoing.ProdutoRepositoryP
 import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
 @AllArgsConstructor
-public class PedidoServiceImpl implements CriarPedidoUseCase, ListarPedidoUseCase {
+public class PedidoServiceImpl implements CriarPedidoUseCase, ListarPedidoUseCase, CheckoutUseCase {
     private final PedidoMapper pedidoMapper;
     private final PedidoRepositoryPort pedidoRepository;
     private final ClienteRepositoryPort clienteRepositoryPort;
     private final ProdutoRepositoryPort produtoRepositoryPort;
+    private final CheckoutServiceImpl checkoutService;
 
 
     @Override
@@ -39,6 +44,7 @@ public class PedidoServiceImpl implements CriarPedidoUseCase, ListarPedidoUseCas
             }
         }
         pedidoRepository.salvar(pedido);
+        checkoutService.criar(pedidoDTO);
     }
 
     @Override
@@ -54,5 +60,17 @@ public class PedidoServiceImpl implements CriarPedidoUseCase, ListarPedidoUseCas
         } else {
             return Collections.emptyList();
         }
+    }
+
+    @Override
+    public CheckoutDTO buscar(Long id) {
+        BigDecimal total = new BigDecimal(0);
+        CheckoutDTO checkoutDTO = new CheckoutDTO();
+        checkoutDTO.setPedido(pedidoMapper.pedidoToPedidoDTO(this.pedidoRepository.buscar(id)));
+        for (ProdutoDTO produtoDTO : checkoutDTO.getPedido().getItens()) {
+            total = total.add(BigDecimal.valueOf(produtoDTO.getPreco()));
+        }
+        checkoutDTO.setTotal(total);
+        return checkoutDTO;
     }
 }

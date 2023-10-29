@@ -8,4 +8,6 @@ public interface PedidoRepositoryPort {
     void salvar(Pedido pedido);
 
     List<Pedido> listarPedido();
+
+    Pedido buscar(Long id);
 }

@@ -8,10 +8,7 @@ import jakarta.persistence.EntityManager;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 
 @Component
 @RequiredArgsConstructor
@@ -46,5 +43,15 @@ public class PedidoRepository implements PedidoRepositoryPort {
             return pedidos;
         }
         return Collections.emptyList();
+    }
+
+    @Override
+    public Pedido buscar(Long id) {
+        Optional<PedidoEntity> pedidoEntity = this.springPedidoRepository.findById(id);
+        if (pedidoEntity.isPresent()) {
+            Pedido pedido = pedidoEntityMapper.pedidoEntityToPedido(pedidoEntity.get());
+            return pedido;
+        }
+        throw new RuntimeException("Pedido não encontrado");
     }
 }

@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("Produtos")
+@RequestMapping("produtos")
 @RequiredArgsConstructor
 public class ProdutoController {
     private final CriarProdutoUseCase criarProdutoUseCase;

@@ -4,6 +4,7 @@ import com.techchallenge.lanchonete.LanchoneteApplication;
 import com.techchallenge.lanchonete.application.mapper.cliente.ClienteMapper;
 import com.techchallenge.lanchonete.application.mapper.pedido.PedidoMapper;
 import com.techchallenge.lanchonete.application.mapper.produto.ProdutoMapper;
+import com.techchallenge.lanchonete.application.port.incoming.checkout.CheckoutUseCase;
 import com.techchallenge.lanchonete.application.port.incoming.cliente.BuscarClienteUseCase;
 import com.techchallenge.lanchonete.application.port.incoming.cliente.CriarClienteUseCase;
 import com.techchallenge.lanchonete.application.port.incoming.pedido.CriarPedidoUseCase;
@@ -14,6 +15,7 @@ import com.techchallenge.lanchonete.application.port.incoming.produto.RemoverPro
 import com.techchallenge.lanchonete.application.port.outgoing.ClienteRepositoryPort;
 import com.techchallenge.lanchonete.application.port.outgoing.PedidoRepositoryPort;
 import com.techchallenge.lanchonete.application.port.outgoing.ProdutoRepositoryPort;
+import com.techchallenge.lanchonete.application.service.CheckoutServiceImpl;
 import com.techchallenge.lanchonete.application.service.ClienteServiceImpl;
 import com.techchallenge.lanchonete.application.service.PedidoServiceImpl;
 import com.techchallenge.lanchonete.application.service.ProdutoServiceImpl;
@@ -50,12 +52,17 @@ public class BeanConfiguration {
     }
 
     @Bean
-    CriarPedidoUseCase criarPedidoUseCase(PedidoMapper pedidoMapper, PedidoRepositoryPort pedidoRepositoryPort, ClienteRepositoryPort clienteRepositoryPort, ProdutoRepositoryPort produtoRepositoryPort) {
-        return new PedidoServiceImpl(pedidoMapper, pedidoRepositoryPort, clienteRepositoryPort, produtoRepositoryPort);
+    CriarPedidoUseCase criarPedidoUseCase(PedidoMapper pedidoMapper, PedidoRepositoryPort pedidoRepositoryPort, ClienteRepositoryPort clienteRepositoryPort, ProdutoRepositoryPort produtoRepositoryPort, CheckoutServiceImpl checkoutService) {
+        return new PedidoServiceImpl(pedidoMapper, pedidoRepositoryPort, clienteRepositoryPort, produtoRepositoryPort, checkoutService);
     }
 
     @Bean
-    ListarPedidoUseCase listarPedidoUseCase(PedidoMapper pedidoMapper, PedidoRepositoryPort pedidoRepositoryPort, ClienteRepositoryPort clienteRepositoryPort, ProdutoRepositoryPort produtoRepositoryPort) {
-        return new PedidoServiceImpl(pedidoMapper, pedidoRepositoryPort, clienteRepositoryPort, produtoRepositoryPort);
+    ListarPedidoUseCase listarPedidoUseCase(PedidoMapper pedidoMapper, PedidoRepositoryPort pedidoRepositoryPort, ClienteRepositoryPort clienteRepositoryPort, ProdutoRepositoryPort produtoRepositoryPort, CheckoutServiceImpl checkoutService) {
+        return new PedidoServiceImpl(pedidoMapper, pedidoRepositoryPort, clienteRepositoryPort, produtoRepositoryPort, checkoutService);
+    }
+
+    @Bean
+    CheckoutUseCase checkoutUseCase(PedidoMapper pedidoMapper, PedidoRepositoryPort pedidoRepositoryPort, ClienteRepositoryPort clienteRepositoryPort, ProdutoRepositoryPort produtoRepositoryPort, CheckoutServiceImpl checkoutService) {
+        return new PedidoServiceImpl(pedidoMapper, pedidoRepositoryPort, clienteRepositoryPort, produtoRepositoryPort, checkoutService);
     }
 }

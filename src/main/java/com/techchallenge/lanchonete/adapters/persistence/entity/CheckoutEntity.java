@@ -1,28 +1,26 @@
 package com.techchallenge.lanchonete.adapters.persistence.entity;
 
-
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.util.List;
+import java.math.BigDecimal;
 
 @Entity
-@Table(name = "Cliente")
+@Table(name = "Checkout")
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class ClienteEntity {
+public class CheckoutEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "users_seq_gen")
-    @SequenceGenerator(name = "users_seq_gen", sequenceName = "cliente_seq", allocationSize = 1)
+    @SequenceGenerator(name = "users_seq_gen", sequenceName = "checkout_seq", allocationSize = 1)
     private Long id;
-    private String nome;
-    private String cpf;
-    private String email;
-    @OneToMany(mappedBy = "cliente", cascade = CascadeType.ALL)
-    private List<PedidoEntity> pedidos;
+    @OneToOne
+    @JoinColumn(name = "Pedido_id")
+    private PedidoEntity pedido;
+    private BigDecimal total;
 }

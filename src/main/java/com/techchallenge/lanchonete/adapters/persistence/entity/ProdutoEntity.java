@@ -26,25 +26,4 @@ public class ProdutoEntity {
 
     @ManyToMany(mappedBy = "produtos")
     private List<PedidoEntity> pedidos;
-
-    /*public ProdutoEntity(Produto produto) {
-        this.Id = produto.getId();
-        this.tipo = produto.getTipo();
-        this.nome = produto.getNome();
-        this.descricao = produto.getDescricao();
-        this.preco = produto.getPreco();
-    }
-
-    public ProdutoEntity atualizar(Produto produto) {
-        this.Id = produto.getId();
-        this.tipo = produto.getTipo();
-        this.nome = produto.getNome();
-        this.descricao = produto.getDescricao();
-        this.preco = produto.getPreco();
-        return this;
-    }
-
-    public Produto toProduto() {
-        return new Produto(this.Id, this.tipo, this.nome, this.descricao, this.preco);
-    }*/
 }
