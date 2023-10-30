@@ -41,9 +41,9 @@ public class ProdutoServiceImpl implements CriarProdutoUseCase, BuscarTipoProdut
     }
 
     @Override
-    public void editar(ProdutoDTO produtoDto) {
+    public void editar(ProdutoDTO produtoDto, Long id) {
         Produto produto = produtoMapper.produtoDTOToProduto(produtoDto);
-        this.produtoRepository.editar(produto);
+        this.produtoRepository.editar(produto, id);
     }
 
     @Override

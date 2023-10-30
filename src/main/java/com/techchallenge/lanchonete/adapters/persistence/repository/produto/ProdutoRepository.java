@@ -47,10 +47,10 @@ public class ProdutoRepository implements ProdutoRepositoryPort {
     }
 
     @Override
-    public void editar(Produto produto) {
-        ProdutoEntity produtoById = springProdutoRepository.findById(produto.getId()).get();
+    public void editar(Produto produto, Long id) {
+        ProdutoEntity produtoById = springProdutoRepository.findById(id).get();
         if (!Objects.isNull(produtoById)) {
-            produtoById = produtoEntityMapper.produtoToProdutoEntity(produto);
+            produtoById = produtoEntityMapper.updateProdutoEntity(produto, produtoById);
             this.springProdutoRepository.save(produtoById);
         } else {
             throw new RuntimeException("Produto inexistente, realize o cadastro com o criar");

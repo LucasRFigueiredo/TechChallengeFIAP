@@ -11,7 +11,7 @@ public interface ProdutoRepositoryPort {
 
     List<Produto> buscarTipo(String tipo);
 
-    void editar(Produto produto);
+    void editar(Produto produto, Long id);
 
     void remover(Long id);
 }
