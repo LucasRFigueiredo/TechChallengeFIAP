@@ -12,7 +12,7 @@ Projeto voltado para o fluxo de um restaurante, desde a fase de pedidos até o i
 
 ## Tecnologia
 
-This project was built using the following technologies and architectural concepts:
+Este projeto foi desenvolvido utilizando as seguintes tecnologias e conceitos:
 
 - [Java](https://www.java.com/pt-BR/)
 - [Docker](https://www.docker.com/)
