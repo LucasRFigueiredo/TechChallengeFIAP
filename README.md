@@ -26,7 +26,7 @@ This project was built using the following technologies and architectural concep
 ### Event Storming
 
 <div align="center">
-  <img src="./.github/event-storming.png" alt="Event Storming" />
+  <img src="./.github/Storm.png" alt="Event Storming" />
 </div>
 
 ### Context Map
