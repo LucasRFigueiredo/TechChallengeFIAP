@@ -32,15 +32,15 @@ Este projeto foi desenvolvido utilizando as seguintes tecnologias e conceitos:
 </div>
 
 ### Dicionário Ubíquo
-##Pedido:
+## Pedido:
 status: O status atual do pedido (por exemplo, "Em preparação", "Finalizado").
 
-##Cliente:
+## Cliente:
 nome: O nome do cliente.
 cpf: O número de CPF do cliente.
 email: O endereço de e-mail do cliente.
 
-##Produto:
+## Produto:
 tipo: O tipo de produto (por exemplo, "Alimento", "Bebida", "Sobremesa").
 nome: O nome do produto.
 descricao: Uma descrição do produto.
