@@ -29,6 +29,18 @@ This project was built using the following technologies and architectural concep
   <img src="./Storm.jpg" alt="Event Storming" />
 </div>
 
+### Melhor exibição
+<div align="center">
+  <img src="./Fiap2.jpg" alt="Event Storming" />
+</div>
+
+<div align="center">
+  <img src="./Fiap3.jpg" alt="Event Storming" />
+</div>
+
+<div align="center">
+  <img src="./Fiap4.jpg" alt="Event Storming" />
+</div>
 ### Context Map
 
 <div align="center">
