@@ -20,12 +20,12 @@ This project was built using the following technologies and architectural concep
 - [Hexagonal Architecture](<https://en.wikipedia.org/wiki/Hexagonal_architecture_(software)>)
 
 ## Banco de dados (DER/Postgres)
-
-## DDD (Domain-Driven Design)
 <div align="center">
   <img src="./db.jpeg" alt="Event Storming" />
 </div>
 
+
+## DDD (Domain-Driven Design)
 
 ### Event Storming
 https://miro.com/app/board/uXjVNWGRxow=/
