@@ -1,0 +1,11 @@
+version: '3'
+services:
+  postgres:
+    image: postgres:latest # Use a imagem mais recente do PostgreSQL
+    container_name: bd-techChallenge
+    ports:
+      - "5432:5432" # Mapeia a porta do contêiner para a porta do host
+    environment:
+      POSTGRES_DB: lanchonete # Nome do banco de dados
+      POSTGRES_USER: postgres # Nome de usuário
+      POSTGRES_PASSWORD: password # Senha
