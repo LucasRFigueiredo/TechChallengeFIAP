@@ -18,7 +18,7 @@ após fazer o clone, vá ate a pasta e execute o comando
 
 ####docker-compose up --build
 
-e para fazer as requests seguir as colections
+e para fazer as requests seguir as colections na raiz do projeto
 
 ## Tecnologia
 
