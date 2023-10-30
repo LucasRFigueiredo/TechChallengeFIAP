@@ -33,7 +33,7 @@ Este projeto foi desenvolvido utilizando as seguintes tecnologias e conceitos:
 
 ### Dicionário Ubíquo
 #### Pedido:
-status: O status atual do pedido (por exemplo, "Em preparação", "Finalizado").
+- status: O status atual do pedido (por exemplo, "Em preparação", "Finalizado").
 
 #### Cliente:
 - nome: O nome do cliente.
@@ -45,6 +45,9 @@ status: O status atual do pedido (por exemplo, "Em preparação", "Finalizado").
 - nome: O nome do produto.
 - descricao: Uma descrição do produto.
 - preço: O preço do produto.
+
+#### Checkout
+- total: Valor total do pedido
 
 ### Event Storming
 https://miro.com/app/board/uXjVNWGRxow=/
