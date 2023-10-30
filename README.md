@@ -36,15 +36,15 @@ Este projeto foi desenvolvido utilizando as seguintes tecnologias e conceitos:
 status: O status atual do pedido (por exemplo, "Em preparação", "Finalizado").
 
 #### Cliente:
-nome: O nome do cliente.
-cpf: O número de CPF do cliente.
-email: O endereço de e-mail do cliente.
+- nome: O nome do cliente.
+- cpf: O número de CPF do cliente.
+- email: O endereço de e-mail do cliente.
 
 #### Produto:
-tipo: O tipo de produto (por exemplo, "Alimento", "Bebida", "Sobremesa").
-nome: O nome do produto.
-descricao: Uma descrição do produto.
-preço: O preço do produto.
+- tipo: O tipo de produto (por exemplo, "Alimento", "Bebida", "Sobremesa").
+- nome: O nome do produto.
+- descricao: Uma descrição do produto.
+- preço: O preço do produto.
 
 ### Event Storming
 https://miro.com/app/board/uXjVNWGRxow=/
