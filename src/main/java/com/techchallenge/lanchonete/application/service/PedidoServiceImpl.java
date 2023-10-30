@@ -57,16 +57,4 @@ public class PedidoServiceImpl implements CriarPedidoUseCase, ListarPedidoUseCas
             return Collections.emptyList();
         }
     }
-
-   /* @Override
-    public CheckoutDTO buscar(Long id) {
-        BigDecimal total = new BigDecimal(0);
-        CheckoutDTO checkoutDTO = new CheckoutDTO();
-        checkoutDTO.setPedido(pedidoMapper.pedidoToPedidoDTO(this.pedidoRepository.buscar(id)));
-        for (ProdutoDTO produtoDTO : checkoutDTO.getPedido().getItens()) {
-            total = total.add(BigDecimal.valueOf(produtoDTO.getPreco()));
-        }
-        checkoutDTO.setTotal(total);
-        return checkoutDTO;
-    }*/
 }
