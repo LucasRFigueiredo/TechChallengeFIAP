@@ -60,7 +60,7 @@ Este projeto foi desenvolvido utilizando as seguintes tecnologias e conceitos:
 - total: Valor total do pedido
 
 ### Event Storming
-https://miro.com/app/board/uXjVNWGRxow=/
+[https://miro.com/app/board/uXjVNWGRxow=/](https://miro.com/app/board/uXjVNWGRxow=/?share_link_id=704249751882)
 
 <div align="center">
   <img src="./Storm.jpg" alt="Event Storming" />
