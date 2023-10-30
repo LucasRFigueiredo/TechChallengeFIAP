@@ -27,6 +27,10 @@ Este projeto foi desenvolvido utilizando as seguintes tecnologias e conceitos:
 
 ## DDD (Domain-Driven Design)
 
+<div align="center">
+  <img src="./DDD.jpg" alt="Event Storming" />
+</div>
+
 ### Event Storming
 https://miro.com/app/board/uXjVNWGRxow=/
 
@@ -46,11 +50,7 @@ https://miro.com/app/board/uXjVNWGRxow=/
 <div align="center">
   <img src="./Fiap4.jpg" alt="Event Storming" />
 </div>
-### Context Map
 
-<div align="center">
-  <img src="./.github/context-map.png" alt="Context Map" />
-</div>
 
 ## 📝 License
 
