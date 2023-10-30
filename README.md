@@ -14,7 +14,9 @@ Projeto voltado para o fluxo de um restaurante, desde a fase de pedidos até o i
 
 faça o clone do projeto https://github.com/LucasRFigueiredo/TechChallengeFIAP.git
 
-após fazer o clone, vá ate a pasta e execute o comando docker-compose up --build
+após fazer o clone, vá ate a pasta e execute o comando 
+
+####docker-compose up --build
 
 e para fazer as requests seguir as colections
 
