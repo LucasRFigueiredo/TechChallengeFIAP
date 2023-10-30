@@ -4,5 +4,5 @@ import com.techchallenge.lanchonete.application.dto.ProdutoDTO;
 
 public interface EditarProdutoUseCase {
 
-    void editar(ProdutoDTO produtoDto);
+    void editar(ProdutoDTO produtoDto, Long id);
 }

@@ -1,6 +1,5 @@
 package com.techchallenge.lanchonete.adapters.web;
 
-import com.techchallenge.lanchonete.application.dto.CheckoutDTO;
 import com.techchallenge.lanchonete.application.dto.PedidoDTO;
 import com.techchallenge.lanchonete.application.port.incoming.checkout.CheckoutUseCase;
 import com.techchallenge.lanchonete.application.port.incoming.pedido.CriarPedidoUseCase;
@@ -26,10 +25,5 @@ public class PedidoController {
     @GetMapping
     List<PedidoDTO> listaPedidos() {
         return listarPedidoUseCase.listar();
-    }
-
-    @GetMapping(value = "/{id}")
-    CheckoutDTO checkout(@PathVariable Long id) {
-        return checkoutUseCase.buscar(id);
     }
 }

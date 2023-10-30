@@ -1,11 +1,30 @@
 version: '3'
 services:
   postgres:
-    image: postgres:latest # Use a imagem mais recente do PostgreSQL
-    container_name: bd-techChallenge
-    ports:
-      - "5432:5432" # Mapeia a porta do contêiner para a porta do host
+    image: postgres
+    container_name: postgres
+    restart: unless-stopped
+    tty: true
+    networks:
+      - lanchonete-network
     environment:
-      POSTGRES_DB: lanchonete # Nome do banco de dados
-      POSTGRES_USER: postgres # Nome de usuário
-      POSTGRES_PASSWORD: password # Senha
+      POSTGRES_DB: lanchonete
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: password
+    #ports:
+    #  - "5435:5432"
+    #volumes:
+    #  - ./db/data :/postgresql/data
+
+  lanchonete:
+    build: .
+    ports:
+      - "8080:8080"
+    depends_on:
+      - postgres
+    networks:
+      - lanchonete-network
+
+networks:
+  lanchonete-network:
+    driver: bridge

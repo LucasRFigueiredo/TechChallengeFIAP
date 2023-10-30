@@ -30,9 +30,9 @@ public class ProdutoController {
         return buscarTipoProdutoUseCase.buscarTipo(tipo);
     }
 
-    @PutMapping
-    void editarProduto(@RequestBody ProdutoDTO produtoDto) {
-        editarProdutoUseCase.editar(produtoDto);
+    @PutMapping(value = "/{id}")
+    void editarProduto(@RequestBody ProdutoDTO produtoDto, @PathVariable Long id) {
+        editarProdutoUseCase.editar(produtoDto, id);
     }
 
     @DeleteMapping(value = "/{id}")

@@ -4,6 +4,8 @@ import com.techchallenge.lanchonete.adapters.persistence.entity.ProdutoEntity;
 import com.techchallenge.lanchonete.application.domain.Produto;
 import org.springframework.stereotype.Component;
 
+import java.util.Objects;
+
 @Component
 public class ProdutoEntityMapper {
     public static Produto produtoEntityToProduto(ProdutoEntity produtoEntity) {
@@ -23,6 +25,22 @@ public class ProdutoEntityMapper {
         produtoEntity.setNome(produto.getNome());
         produtoEntity.setDescricao(produto.getDescricao());
         produtoEntity.setPreco(produto.getPreco());
+        return produtoEntity;
+    }
+
+    public static ProdutoEntity updateProdutoEntity(Produto produto, ProdutoEntity produtoEntity) {
+        if (!Objects.isNull(produto.getTipo())) {
+            produtoEntity.setTipo(produto.getTipo());
+        }
+        if (!Objects.isNull(produto.getNome())) {
+            produtoEntity.setNome(produto.getNome());
+        }
+        if (!Objects.isNull(produto.getDescricao())) {
+            produtoEntity.setDescricao(produto.getDescricao());
+        }
+        if (!Objects.isNull(produto.getPreco())) {
+            produtoEntity.setPreco(produto.getPreco());
+        }
         return produtoEntity;
     }
 }
