@@ -26,7 +26,7 @@ This project was built using the following technologies and architectural concep
 ### Event Storming
 
 <div align="center">
-  <img src="./Storm.png" alt="Event Storming" />
+  <img src="./Storm.jng" alt="Event Storming" />
 </div>
 
 ### Context Map
