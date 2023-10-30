@@ -19,30 +19,6 @@ This project was built using the following technologies and architectural concep
 - [DDD (Domain-driven Design)](https://domainlanguage.com/)
 - [Hexagonal Architecture](<https://en.wikipedia.org/wiki/Hexagonal_architecture_(software)>)
 
-## 🟢 Running
-
-Prerequisites: Ensure you have `docker`, `node>=18.16.0` & `npm>=9.5.1` installed.
-
-1. Clone this project:
-
-```sh
-git clone https://github.com/tribofustack/orderly.git
-```
-
-2. Configure your environment by creating a `.env` file based on the `.env.production`.
-
-3. Start the application:
-
-```sh
-npm run start:docker
-```
-
-This will launch the application at port `3000`.
-
-Once it's up, the Swagger documentation can be accessed at `http://localhost:3000/`.
-
-
-
 ## DDD (Domain-Driven Design)
 
 
