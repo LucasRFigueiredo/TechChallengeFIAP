@@ -1,9 +1,9 @@
 package com.techchallenge.lanchonete.application.service;
 
 import com.techchallenge.lanchonete.application.domain.Checkout;
+import com.techchallenge.lanchonete.application.domain.Pedido;
 import com.techchallenge.lanchonete.application.domain.Produto;
 import com.techchallenge.lanchonete.application.dto.CheckoutDTO;
-import com.techchallenge.lanchonete.application.dto.PedidoDTO;
 import com.techchallenge.lanchonete.application.mapper.checkout.CheckoutMapper;
 import com.techchallenge.lanchonete.application.port.incoming.checkout.CheckoutUseCase;
 import com.techchallenge.lanchonete.application.port.outgoing.CheckoutRepositoryPort;
@@ -19,10 +19,10 @@ public class CheckoutServiceImpl implements CheckoutUseCase {
     private final CheckoutRepositoryPort checkoutRepositoryPort;
 
     @Override
-    public void criar(PedidoDTO pedidoDTO) {
+    public void criar(Pedido pedido) {
         BigDecimal total = new BigDecimal(0);
         Checkout checkout = new Checkout();
-        checkout.setPedido(this.pedidoRepository.buscar(pedidoDTO.getId()));
+        checkout.setPedido(pedido);
         for (Produto produto : checkout.getPedido().getItens()) {
             total = total.add(BigDecimal.valueOf(produto.getPreco()));
         }

@@ -1,6 +1,8 @@
 package com.techchallenge.lanchonete.adapters.configuration;
 
 import com.techchallenge.lanchonete.LanchoneteApplication;
+import com.techchallenge.lanchonete.adapters.persistence.repository.pedido.PedidoRepository;
+import com.techchallenge.lanchonete.application.mapper.checkout.CheckoutMapper;
 import com.techchallenge.lanchonete.application.mapper.cliente.ClienteMapper;
 import com.techchallenge.lanchonete.application.mapper.pedido.PedidoMapper;
 import com.techchallenge.lanchonete.application.mapper.produto.ProdutoMapper;
@@ -12,6 +14,7 @@ import com.techchallenge.lanchonete.application.port.incoming.pedido.ListarPedid
 import com.techchallenge.lanchonete.application.port.incoming.produto.CriarProdutoUseCase;
 import com.techchallenge.lanchonete.application.port.incoming.produto.EditarProdutoUseCase;
 import com.techchallenge.lanchonete.application.port.incoming.produto.RemoverProdutoUseCase;
+import com.techchallenge.lanchonete.application.port.outgoing.CheckoutRepositoryPort;
 import com.techchallenge.lanchonete.application.port.outgoing.ClienteRepositoryPort;
 import com.techchallenge.lanchonete.application.port.outgoing.PedidoRepositoryPort;
 import com.techchallenge.lanchonete.application.port.outgoing.ProdutoRepositoryPort;
@@ -62,7 +65,7 @@ public class BeanConfiguration {
     }
 
     @Bean
-    CheckoutUseCase checkoutUseCase(PedidoMapper pedidoMapper, PedidoRepositoryPort pedidoRepositoryPort, ClienteRepositoryPort clienteRepositoryPort, ProdutoRepositoryPort produtoRepositoryPort, CheckoutServiceImpl checkoutService) {
-        return new PedidoServiceImpl(pedidoMapper, pedidoRepositoryPort, clienteRepositoryPort, produtoRepositoryPort, checkoutService);
+    CheckoutUseCase checkoutUseCase(CheckoutMapper checkoutMapper, PedidoRepository pedidoRepository, CheckoutRepositoryPort checkoutRepositoryPort) {
+        return new CheckoutServiceImpl(checkoutMapper, pedidoRepository, checkoutRepositoryPort);
     }
 }

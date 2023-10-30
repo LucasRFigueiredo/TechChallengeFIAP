@@ -29,6 +29,6 @@ public class PedidoEntity {
             joinColumns = @JoinColumn(name = "Pedido_id"),
             inverseJoinColumns = @JoinColumn(name = "Produto_id"))
     private List<ProdutoEntity> produtos;
-    @OneToOne(mappedBy = "pedido")
+    @OneToOne(mappedBy = "pedido", cascade = CascadeType.PERSIST)
     private CheckoutEntity checkout;
 }

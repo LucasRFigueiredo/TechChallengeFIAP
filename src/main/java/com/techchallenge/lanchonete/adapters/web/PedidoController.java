@@ -20,13 +20,11 @@ public class PedidoController {
 
     @PostMapping
     void criarPedido(@RequestBody PedidoDTO pedidoDTO) {
-
         criarPedidoUseCase.criar(pedidoDTO);
     }
 
     @GetMapping
     List<PedidoDTO> listaPedidos() {
-
         return listarPedidoUseCase.listar();
     }
 

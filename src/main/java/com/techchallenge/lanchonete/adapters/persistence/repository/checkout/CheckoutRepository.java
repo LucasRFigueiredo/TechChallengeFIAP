@@ -26,6 +26,7 @@ public class CheckoutRepository implements CheckoutRepositoryPort {
             checkoutEntity = this.springCheckoutRepository.findById(checkout.getId()).get();
             checkoutEntity = checkoutEntityMapper.checkoutToCheckoutEntity(checkout);
         }
+        checkoutEntity.setPedido(entityManager.merge(checkoutEntity.getPedido()));
         checkoutEntity = entityManager.merge(checkoutEntity);
         this.springCheckoutRepository.save(checkoutEntity);
     }

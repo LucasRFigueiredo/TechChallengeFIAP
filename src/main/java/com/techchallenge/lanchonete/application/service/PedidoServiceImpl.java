@@ -2,11 +2,8 @@ package com.techchallenge.lanchonete.application.service;
 
 import com.techchallenge.lanchonete.application.domain.Pedido;
 import com.techchallenge.lanchonete.application.domain.Produto;
-import com.techchallenge.lanchonete.application.dto.CheckoutDTO;
 import com.techchallenge.lanchonete.application.dto.PedidoDTO;
-import com.techchallenge.lanchonete.application.dto.ProdutoDTO;
 import com.techchallenge.lanchonete.application.mapper.pedido.PedidoMapper;
-import com.techchallenge.lanchonete.application.port.incoming.checkout.CheckoutUseCase;
 import com.techchallenge.lanchonete.application.port.incoming.pedido.CriarPedidoUseCase;
 import com.techchallenge.lanchonete.application.port.incoming.pedido.ListarPedidoUseCase;
 import com.techchallenge.lanchonete.application.port.outgoing.ClienteRepositoryPort;
@@ -15,14 +12,13 @@ import com.techchallenge.lanchonete.application.port.outgoing.ProdutoRepositoryP
 import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
 
-import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
 @AllArgsConstructor
-public class PedidoServiceImpl implements CriarPedidoUseCase, ListarPedidoUseCase, CheckoutUseCase {
+public class PedidoServiceImpl implements CriarPedidoUseCase, ListarPedidoUseCase {
     private final PedidoMapper pedidoMapper;
     private final PedidoRepositoryPort pedidoRepository;
     private final ClienteRepositoryPort clienteRepositoryPort;
@@ -44,7 +40,7 @@ public class PedidoServiceImpl implements CriarPedidoUseCase, ListarPedidoUseCas
             }
         }
         pedidoRepository.salvar(pedido);
-        checkoutService.criar(pedidoDTO);
+        checkoutService.criar(pedido);
     }
 
     @Override
@@ -62,7 +58,7 @@ public class PedidoServiceImpl implements CriarPedidoUseCase, ListarPedidoUseCas
         }
     }
 
-    @Override
+   /* @Override
     public CheckoutDTO buscar(Long id) {
         BigDecimal total = new BigDecimal(0);
         CheckoutDTO checkoutDTO = new CheckoutDTO();
@@ -72,5 +68,5 @@ public class PedidoServiceImpl implements CriarPedidoUseCase, ListarPedidoUseCas
         }
         checkoutDTO.setTotal(total);
         return checkoutDTO;
-    }
+    }*/
 }
