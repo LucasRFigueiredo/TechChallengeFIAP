@@ -24,6 +24,7 @@ This project was built using the following technologies and architectural concep
 
 
 ### Event Storming
+https://miro.com/app/board/uXjVNWGRxow=/
 
 <div align="center">
   <img src="./Storm.jpg" alt="Event Storming" />
