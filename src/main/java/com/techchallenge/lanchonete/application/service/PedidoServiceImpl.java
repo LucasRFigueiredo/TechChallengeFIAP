@@ -3,7 +3,7 @@ package com.techchallenge.lanchonete.application.service;
 import com.techchallenge.lanchonete.application.domain.Pedido;
 import com.techchallenge.lanchonete.application.domain.Produto;
 import com.techchallenge.lanchonete.application.dto.PedidoDTO;
-import com.techchallenge.lanchonete.application.mapper.pedido.PedidoMapper;
+import com.techchallenge.lanchonete.infrastructure.gateways.mapper.pedido.PedidoMapper;
 import com.techchallenge.lanchonete.application.port.incoming.pedido.CriarPedidoUseCase;
 import com.techchallenge.lanchonete.application.port.incoming.pedido.ListarPedidoUseCase;
 import com.techchallenge.lanchonete.application.port.outgoing.ClienteRepositoryPort;
@@ -17,16 +17,27 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
-@AllArgsConstructor
-public class PedidoServiceImpl implements CriarPedidoUseCase, ListarPedidoUseCase {
+public class PedidoServiceImpl {
+    private final CriarPedidoUseCase criarPedidoUseCase;
+    private final ListarPedidoUseCase listarPedidoUseCase;
     private final PedidoMapper pedidoMapper;
     private final PedidoRepositoryPort pedidoRepository;
     private final ClienteRepositoryPort clienteRepositoryPort;
     private final ProdutoRepositoryPort produtoRepositoryPort;
     private final CheckoutServiceImpl checkoutService;
 
-
-    @Override
+    public PedidoServiceImpl(CriarPedidoUseCase criarPedidoUseCase, ListarPedidoUseCase listarPedidoUseCase,
+                             PedidoMapper pedidoMapper, PedidoRepositoryPort pedidoRepository,
+                             ClienteRepositoryPort clienteRepositoryPort, ProdutoRepositoryPort produtoRepositoryPort,
+                             CheckoutServiceImpl checkoutService) {
+        this.criarPedidoUseCase = criarPedidoUseCase;
+        this.listarPedidoUseCase = listarPedidoUseCase;
+        this.pedidoMapper = pedidoMapper;
+        this.pedidoRepository = pedidoRepository;
+        this.clienteRepositoryPort = clienteRepositoryPort;
+        this.produtoRepositoryPort = produtoRepositoryPort;
+        this.checkoutService = checkoutService;
+    }
     @Transactional
     public void criar(PedidoDTO pedidoDTO) {
         Pedido pedido = pedidoMapper.pedidoDTOToPedido(pedidoDTO);
@@ -42,8 +53,6 @@ public class PedidoServiceImpl implements CriarPedidoUseCase, ListarPedidoUseCas
         pedidoRepository.salvar(pedido);
         checkoutService.criar(pedido);
     }
-
-    @Override
     public List<PedidoDTO> listar() {
         List<Pedido> pedidos = this.pedidoRepository.listarPedido();
         if (!pedidos.isEmpty()) {
