@@ -1,7 +1,7 @@
 package com.techchallenge.lanchonete.application.port.incoming.produto;
 
-import com.techchallenge.lanchonete.application.dto.ProdutoDTO;
+import com.techchallenge.lanchonete.application.domain.Produto;
 
 public interface CriarProdutoUseCase {
-    void criar(ProdutoDTO produtoDto);
+    void criar(Produto produto);
 }

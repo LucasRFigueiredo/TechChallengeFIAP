@@ -7,27 +7,37 @@ import com.techchallenge.lanchonete.application.port.incoming.produto.BuscarTipo
 import com.techchallenge.lanchonete.application.port.incoming.produto.CriarProdutoUseCase;
 import com.techchallenge.lanchonete.application.port.incoming.produto.EditarProdutoUseCase;
 import com.techchallenge.lanchonete.application.port.incoming.produto.RemoverProdutoUseCase;
-import com.techchallenge.lanchonete.application.port.outgoing.ProdutoRepositoryPort;
-import lombok.AllArgsConstructor;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-@AllArgsConstructor
-public class ProdutoServiceImpl implements CriarProdutoUseCase, BuscarTipoProdutoUseCase, EditarProdutoUseCase, RemoverProdutoUseCase {
-    private final ProdutoRepositoryPort produtoRepository;
+
+public class ProdutoServiceImpl {
+    private final CriarProdutoUseCase criarProdutoUseCase;
+    private final BuscarTipoProdutoUseCase buscarTipoProdutoUseCase;
+    private final EditarProdutoUseCase editarProdutoUseCase;
+    private final RemoverProdutoUseCase removerProdutoUseCase;
     private final ProdutoMapper produtoMapper;
 
-    @Override
-    public void criar(ProdutoDTO produtoDto) {
-        Produto produto = produtoMapper.produtoDTOToProduto(produtoDto);
-        this.produtoRepository.salvar(produto);
+    public ProdutoServiceImpl(CriarProdutoUseCase criarProdutoUseCase, BuscarTipoProdutoUseCase buscarTipoProdutoUseCase,
+                              EditarProdutoUseCase editarProdutoUseCase, RemoverProdutoUseCase removerProdutoUseCase,
+                              ProdutoMapper produtoMapper) {
+        this.criarProdutoUseCase = criarProdutoUseCase;
+        this.buscarTipoProdutoUseCase = buscarTipoProdutoUseCase;
+        this.editarProdutoUseCase = editarProdutoUseCase;
+        this.removerProdutoUseCase = removerProdutoUseCase;
+        this.produtoMapper = produtoMapper;
     }
 
-    @Override
+
+    public void criar(Produto produto) {
+        criarProdutoUseCase.criar(produto);
+    }
+
+
     public List<ProdutoDTO> buscarTipo(String tipo) {
-        List<Produto> produtos = this.produtoRepository.buscarTipo(tipo);
+        List<Produto> produtos = this.buscarTipoProdutoUseCase.buscarTipo(tipo);
         if (!produtos.isEmpty()) {
             List<ProdutoDTO> produtoDTOS = new ArrayList<>();
             for (Produto produto : produtos) {
@@ -40,15 +50,14 @@ public class ProdutoServiceImpl implements CriarProdutoUseCase, BuscarTipoProdut
         return Collections.emptyList();
     }
 
-    @Override
-    public void editar(ProdutoDTO produtoDto, Long id) {
-        Produto produto = produtoMapper.produtoDTOToProduto(produtoDto);
-        this.produtoRepository.editar(produto, id);
+
+    public void editar(Produto produto, Long id) {
+        this.editarProdutoUseCase.editar(produto, id);
     }
 
-    @Override
+
     public void remover(Long id) {
-        this.produtoRepository.remover(id);
+        this.removerProdutoUseCase.remover(id);
     }
 
 

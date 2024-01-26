@@ -1,8 +1,8 @@
 package com.techchallenge.lanchonete.application.port.incoming.produto;
 
-import com.techchallenge.lanchonete.application.dto.ProdutoDTO;
+import com.techchallenge.lanchonete.application.domain.Produto;
 
 public interface EditarProdutoUseCase {
 
-    void editar(ProdutoDTO produtoDto, Long id);
+    void editar(Produto produto, Long id);
 }
