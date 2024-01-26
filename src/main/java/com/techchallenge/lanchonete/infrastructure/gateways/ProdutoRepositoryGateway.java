@@ -4,17 +4,14 @@ import com.techchallenge.lanchonete.adapters.persistence.entity.ProdutoEntity;
 import com.techchallenge.lanchonete.adapters.persistence.repository.produto.SpringProdutoRepository;
 import com.techchallenge.lanchonete.application.domain.Produto;
 import com.techchallenge.lanchonete.application.mapper.produto.ProdutoEntityMapper;
-import com.techchallenge.lanchonete.application.port.incoming.produto.BuscarTipoProdutoUseCase;
-import com.techchallenge.lanchonete.application.port.incoming.produto.CriarProdutoUseCase;
-import com.techchallenge.lanchonete.application.port.incoming.produto.EditarProdutoUseCase;
-import com.techchallenge.lanchonete.application.port.incoming.produto.RemoverProdutoUseCase;
+import com.techchallenge.lanchonete.application.port.incoming.produto.*;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
 public class ProdutoRepositoryGateway implements CriarProdutoUseCase, BuscarTipoProdutoUseCase, EditarProdutoUseCase,
-        RemoverProdutoUseCase {
+        RemoverProdutoUseCase, BuscarProdutoUseCase {
     private final SpringProdutoRepository springProdutoRepository;
     private final ProdutoEntityMapper produtoEntityMapper;
 
@@ -60,5 +57,15 @@ public class ProdutoRepositoryGateway implements CriarProdutoUseCase, BuscarTipo
     @Override
     public void remover(Long id) {
         springProdutoRepository.deleteById(id);
+    }
+
+    @Override
+    public Produto buscar(Long id) {
+        ProdutoEntity produtoById = springProdutoRepository.findById(id).get();
+        if (!Objects.isNull(produtoById)) {
+            return produtoEntityMapper.produtoEntityToProduto(produtoById);
+        } else {
+            throw new RuntimeException("Produto inexistente, realize o cadastro com o criar");
+        }
     }
 }

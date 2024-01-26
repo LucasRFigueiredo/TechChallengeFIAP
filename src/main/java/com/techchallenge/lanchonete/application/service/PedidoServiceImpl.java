@@ -4,48 +4,55 @@ import com.techchallenge.lanchonete.application.domain.Pedido;
 import com.techchallenge.lanchonete.application.domain.Produto;
 import com.techchallenge.lanchonete.application.dto.PedidoDTO;
 import com.techchallenge.lanchonete.application.mapper.pedido.PedidoMapper;
+import com.techchallenge.lanchonete.application.port.incoming.cliente.BuscarClienteUseCase;
 import com.techchallenge.lanchonete.application.port.incoming.pedido.CriarPedidoUseCase;
 import com.techchallenge.lanchonete.application.port.incoming.pedido.ListarPedidoUseCase;
-import com.techchallenge.lanchonete.application.port.outgoing.ClienteRepositoryPort;
-import com.techchallenge.lanchonete.application.port.outgoing.PedidoRepositoryPort;
-import com.techchallenge.lanchonete.application.port.outgoing.ProdutoRepositoryPort;
+import com.techchallenge.lanchonete.application.port.incoming.produto.BuscarProdutoUseCase;
 import jakarta.transaction.Transactional;
-import lombok.AllArgsConstructor;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
-@AllArgsConstructor
-public class PedidoServiceImpl implements CriarPedidoUseCase, ListarPedidoUseCase {
+public class PedidoServiceImpl {
+    private final CriarPedidoUseCase criarPedidoUseCase;
+    private final ListarPedidoUseCase listarPedidoUseCase;
+    private final BuscarProdutoUseCase buscarProdutoUseCase;
+    private final BuscarClienteUseCase buscarClienteUseCase;
     private final PedidoMapper pedidoMapper;
-    private final PedidoRepositoryPort pedidoRepository;
-    private final ClienteRepositoryPort clienteRepositoryPort;
-    private final ProdutoRepositoryPort produtoRepositoryPort;
     private final CheckoutServiceImpl checkoutService;
 
+    public PedidoServiceImpl(CriarPedidoUseCase criarPedidoUseCase, ListarPedidoUseCase listarPedidoUseCase,
+                             BuscarProdutoUseCase buscarProdutoUseCase, BuscarClienteUseCase buscarClienteUseCase,
+                             PedidoMapper pedidoMapper, CheckoutServiceImpl checkoutService) {
+        this.criarPedidoUseCase = criarPedidoUseCase;
+        this.listarPedidoUseCase = listarPedidoUseCase;
+        this.buscarProdutoUseCase = buscarProdutoUseCase;
+        this.buscarClienteUseCase = buscarClienteUseCase;
+        this.pedidoMapper = pedidoMapper;
+        this.checkoutService = checkoutService;
+    }
 
-    @Override
     @Transactional
     public void criar(PedidoDTO pedidoDTO) {
         Pedido pedido = pedidoMapper.pedidoDTOToPedido(pedidoDTO);
-        pedido.setCliente(clienteRepositoryPort.buscar(pedido.getCliente().getCpf()));
+        pedido.setCliente(buscarClienteUseCase.buscar(pedido.getCliente().getCpf()));
 
         List<Produto> produtos = Optional.ofNullable(pedido.getItens()).orElse(Collections.emptyList());
         if (!produtos.isEmpty()) {
             for (Produto produto : produtos) {
-                produtoRepositoryPort.buscar(produto.getId());
+                buscarProdutoUseCase.buscar(produto.getId());
                 //TODO logica de estoque no futuro?
             }
         }
-        pedidoRepository.salvar(pedido);
+        Long pedidoId = criarPedidoUseCase.criar(pedido);
+        pedido.setId(pedidoId);
         checkoutService.criar(pedido);
     }
 
-    @Override
     public List<PedidoDTO> listar() {
-        List<Pedido> pedidos = this.pedidoRepository.listarPedido();
+        List<Pedido> pedidos = this.listarPedidoUseCase.listar();
         if (!pedidos.isEmpty()) {
             List<PedidoDTO> pedidoDTOS = new ArrayList<>();
             for (Pedido pedido : pedidos) {

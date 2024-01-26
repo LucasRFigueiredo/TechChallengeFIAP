@@ -1,29 +1,27 @@
 package com.techchallenge.lanchonete.adapters.web;
 
 import com.techchallenge.lanchonete.application.dto.PedidoDTO;
-import com.techchallenge.lanchonete.application.port.incoming.checkout.CheckoutUseCase;
-import com.techchallenge.lanchonete.application.port.incoming.pedido.CriarPedidoUseCase;
-import com.techchallenge.lanchonete.application.port.incoming.pedido.ListarPedidoUseCase;
-import lombok.RequiredArgsConstructor;
+import com.techchallenge.lanchonete.application.service.PedidoServiceImpl;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
 @RequestMapping("pedidos")
-@RequiredArgsConstructor
 public class PedidoController {
-    private final CriarPedidoUseCase criarPedidoUseCase;
-    private final ListarPedidoUseCase listarPedidoUseCase;
-    private final CheckoutUseCase checkoutUseCase;
+    private final PedidoServiceImpl pedidoService;
+
+    public PedidoController(PedidoServiceImpl pedidoService) {
+        this.pedidoService = pedidoService;
+    }
 
     @PostMapping
     void criarPedido(@RequestBody PedidoDTO pedidoDTO) {
-        criarPedidoUseCase.criar(pedidoDTO);
+        pedidoService.criar(pedidoDTO);
     }
 
     @GetMapping
     List<PedidoDTO> listaPedidos() {
-        return listarPedidoUseCase.listar();
+        return pedidoService.listar();
     }
 }

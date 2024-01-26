@@ -1,7 +1,7 @@
 package com.techchallenge.lanchonete.application.port.incoming.pedido;
 
-import com.techchallenge.lanchonete.application.dto.PedidoDTO;
+import com.techchallenge.lanchonete.application.domain.Pedido;
 
 public interface CriarPedidoUseCase {
-    void criar(PedidoDTO pedidoDTO);
+    Long criar(Pedido pedido);
 }

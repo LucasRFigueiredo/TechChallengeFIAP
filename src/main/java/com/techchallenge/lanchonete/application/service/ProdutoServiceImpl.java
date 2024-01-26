@@ -3,10 +3,7 @@ package com.techchallenge.lanchonete.application.service;
 import com.techchallenge.lanchonete.application.domain.Produto;
 import com.techchallenge.lanchonete.application.dto.ProdutoDTO;
 import com.techchallenge.lanchonete.application.mapper.produto.ProdutoMapper;
-import com.techchallenge.lanchonete.application.port.incoming.produto.BuscarTipoProdutoUseCase;
-import com.techchallenge.lanchonete.application.port.incoming.produto.CriarProdutoUseCase;
-import com.techchallenge.lanchonete.application.port.incoming.produto.EditarProdutoUseCase;
-import com.techchallenge.lanchonete.application.port.incoming.produto.RemoverProdutoUseCase;
+import com.techchallenge.lanchonete.application.port.incoming.produto.*;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -16,15 +13,18 @@ import java.util.List;
 public class ProdutoServiceImpl {
     private final CriarProdutoUseCase criarProdutoUseCase;
     private final BuscarTipoProdutoUseCase buscarTipoProdutoUseCase;
+    private final BuscarProdutoUseCase buscarProdutoUseCase;
     private final EditarProdutoUseCase editarProdutoUseCase;
     private final RemoverProdutoUseCase removerProdutoUseCase;
     private final ProdutoMapper produtoMapper;
 
     public ProdutoServiceImpl(CriarProdutoUseCase criarProdutoUseCase, BuscarTipoProdutoUseCase buscarTipoProdutoUseCase,
-                              EditarProdutoUseCase editarProdutoUseCase, RemoverProdutoUseCase removerProdutoUseCase,
+                              BuscarProdutoUseCase buscarProdutoUseCase, EditarProdutoUseCase editarProdutoUseCase,
+                              RemoverProdutoUseCase removerProdutoUseCase,
                               ProdutoMapper produtoMapper) {
         this.criarProdutoUseCase = criarProdutoUseCase;
         this.buscarTipoProdutoUseCase = buscarTipoProdutoUseCase;
+        this.buscarProdutoUseCase = buscarProdutoUseCase;
         this.editarProdutoUseCase = editarProdutoUseCase;
         this.removerProdutoUseCase = removerProdutoUseCase;
         this.produtoMapper = produtoMapper;
