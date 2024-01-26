@@ -1,26 +1,31 @@
 package com.techchallenge.lanchonete.adapters.web;
 
+import com.techchallenge.lanchonete.application.domain.Cliente;
 import com.techchallenge.lanchonete.application.dto.ClienteDTO;
-import com.techchallenge.lanchonete.application.port.incoming.cliente.BuscarClienteUseCase;
-import com.techchallenge.lanchonete.application.port.incoming.cliente.CriarClienteUseCase;
-import lombok.RequiredArgsConstructor;
+import com.techchallenge.lanchonete.application.mapper.cliente.ClienteMapper;
+import com.techchallenge.lanchonete.application.service.ClienteServiceImpl;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("clientes")
-@RequiredArgsConstructor
 public class ClienteController {
-    private final CriarClienteUseCase criarClienteUseCase;
-    private final BuscarClienteUseCase buscarClienteUseCase;
+    private final ClienteServiceImpl criarClienteUseCase;
+    private final ClienteMapper clienteMapper;
+
+    public ClienteController(ClienteServiceImpl criarClienteUseCase, ClienteMapper clienteMapper) {
+        this.criarClienteUseCase = criarClienteUseCase;
+        this.clienteMapper = clienteMapper;
+    }
 
     @PostMapping
     void criarCliente(@RequestBody ClienteDTO clienteDTO) {
-        criarClienteUseCase.criar(clienteDTO);
+        Cliente cliente = clienteMapper.clienteDTOtoCliente(clienteDTO);
+        criarClienteUseCase.criar(cliente);
     }
 
     @GetMapping(value = "/{cpf}")
     ClienteDTO buscarCliente(@PathVariable String cpf) {
-        return buscarClienteUseCase.buscar(cpf);
+        return criarClienteUseCase.buscar(cpf);
     }
 
 }

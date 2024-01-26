@@ -1,8 +1,8 @@
 package com.techchallenge.lanchonete.application.port.incoming.cliente;
 
-import com.techchallenge.lanchonete.application.dto.ClienteDTO;
+import com.techchallenge.lanchonete.application.domain.Cliente;
 
 public interface CriarClienteUseCase {
 
-    void criar(ClienteDTO clienteDTO);
+    void criar(Cliente cliente);
 }

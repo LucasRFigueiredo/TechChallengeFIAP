@@ -1,8 +1,10 @@
 package com.techchallenge.lanchonete.adapters.configuration;
 
 import com.techchallenge.lanchonete.LanchoneteApplication;
+import com.techchallenge.lanchonete.adapters.persistence.repository.cliente.SpringClienteRepository;
 import com.techchallenge.lanchonete.adapters.persistence.repository.pedido.PedidoRepository;
 import com.techchallenge.lanchonete.application.mapper.checkout.CheckoutMapper;
+import com.techchallenge.lanchonete.application.mapper.cliente.ClienteEntityMapper;
 import com.techchallenge.lanchonete.application.mapper.cliente.ClienteMapper;
 import com.techchallenge.lanchonete.application.mapper.pedido.PedidoMapper;
 import com.techchallenge.lanchonete.application.mapper.produto.ProdutoMapper;
@@ -22,6 +24,7 @@ import com.techchallenge.lanchonete.application.service.CheckoutServiceImpl;
 import com.techchallenge.lanchonete.application.service.ClienteServiceImpl;
 import com.techchallenge.lanchonete.application.service.PedidoServiceImpl;
 import com.techchallenge.lanchonete.application.service.ProdutoServiceImpl;
+import com.techchallenge.lanchonete.infrastructure.gateways.ClienteRepositoryGateway;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
@@ -29,14 +32,34 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 @ComponentScan(basePackageClasses = LanchoneteApplication.class, basePackages = {"com.techchallenge.lanchonete.cliente.domain.mapper", "com.techchallenge.lanchonete.pedido.domain.mapper", "com.techchallenge.lanchonete.produto.domain.mapper"})
 public class BeanConfiguration {
-    @Bean
-    CriarClienteUseCase criarClienteUseCase(ClienteRepositoryPort clienteRepositoryPort, ClienteMapper clienteMapper) {
+   /* @Bean
+    CriarClienteUseCase criarClienteUseCase(CriarClienteUseCase criarClienteUseCase, BuscarClienteUseCase buscarClienteUseCase, ClienteRepositoryPort clienteRepositoryPort, ClienteMapper clienteMapper) {
+        return new ClienteServiceImpl(criarClienteUseCase, buscarClienteUseCase, clienteRepositoryPort, clienteMapper);
+    }
+
+   @Bean
+    BuscarClienteUseCase buscarClienteUseCase(ClienteRepositoryPort clienteRepositoryPort, ClienteMapper clienteMapper) {
         return new ClienteServiceImpl(clienteRepositoryPort, clienteMapper);
+    }*/
+
+    @Bean
+    public ClienteServiceImpl clienteService(CriarClienteUseCase criarClienteUseCase,
+                                             BuscarClienteUseCase buscarClienteUseCase,
+                                             ClienteRepositoryPort clienteRepository,
+                                             ClienteMapper clienteMapper) {
+        return new ClienteServiceImpl(criarClienteUseCase, buscarClienteUseCase, clienteRepository, clienteMapper);
     }
 
     @Bean
-    BuscarClienteUseCase buscarClienteUseCase(ClienteRepositoryPort clienteRepositoryPort, ClienteMapper clienteMapper) {
-        return new ClienteServiceImpl(clienteRepositoryPort, clienteMapper);
+    CriarClienteUseCase criarClienteUseCase(SpringClienteRepository springClienteRepository,
+                                            ClienteEntityMapper clienteEntityMapper) {
+        return new ClienteRepositoryGateway(springClienteRepository, clienteEntityMapper);
+    }
+
+    @Bean
+    BuscarClienteUseCase buscarClienteUseCase(SpringClienteRepository springClienteRepository,
+                                              ClienteEntityMapper clienteEntityMapper) {
+        return new ClienteRepositoryGateway(springClienteRepository, clienteEntityMapper);
     }
 
     @Bean

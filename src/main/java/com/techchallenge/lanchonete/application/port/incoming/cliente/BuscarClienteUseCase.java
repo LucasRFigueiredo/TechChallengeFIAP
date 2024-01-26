@@ -1,7 +1,7 @@
 package com.techchallenge.lanchonete.application.port.incoming.cliente;
 
-import com.techchallenge.lanchonete.application.dto.ClienteDTO;
+import com.techchallenge.lanchonete.application.domain.Cliente;
 
 public interface BuscarClienteUseCase {
-    ClienteDTO buscar(String cpf);
+    Cliente buscar(String cpf);
 }
