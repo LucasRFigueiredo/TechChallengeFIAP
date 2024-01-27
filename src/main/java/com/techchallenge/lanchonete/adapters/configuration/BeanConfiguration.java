@@ -1,11 +1,11 @@
 package com.techchallenge.lanchonete.adapters.configuration;
 
 import com.techchallenge.lanchonete.LanchoneteApplication;
-import com.techchallenge.lanchonete.infrastructure.persistence.repository.pedido.PedidoRepository;
-import com.techchallenge.lanchonete.infrastructure.gateways.mapper.checkout.CheckoutMapper;
-import com.techchallenge.lanchonete.infrastructure.gateways.mapper.cliente.ClienteMapper;
-import com.techchallenge.lanchonete.infrastructure.gateways.mapper.pedido.PedidoMapper;
-import com.techchallenge.lanchonete.infrastructure.gateways.mapper.produto.ProdutoMapper;
+import com.techchallenge.lanchonete.adapters.persistence.repository.pedido.PedidoRepository;
+import com.techchallenge.lanchonete.application.mapper.checkout.CheckoutMapper;
+import com.techchallenge.lanchonete.application.mapper.cliente.ClienteMapper;
+import com.techchallenge.lanchonete.application.mapper.pedido.PedidoMapper;
+import com.techchallenge.lanchonete.application.mapper.produto.ProdutoMapper;
 import com.techchallenge.lanchonete.application.port.incoming.checkout.CheckoutUseCase;
 import com.techchallenge.lanchonete.application.port.incoming.cliente.BuscarClienteUseCase;
 import com.techchallenge.lanchonete.application.port.incoming.cliente.CriarClienteUseCase;
