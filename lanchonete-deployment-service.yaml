@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: lanchonete
-        image: lucasrfigueiredo/techchallenge-fiap:latest
+        image: lucasrfigueiredo/techchallenge-fiap:version1
         ports:
         - containerPort: 8080
         env:
