@@ -1,10 +1,10 @@
 package com.techchallenge.lanchonete.infrastructure.gateways;
 
-import com.techchallenge.lanchonete.adapters.persistence.entity.ProdutoEntity;
-import com.techchallenge.lanchonete.adapters.persistence.repository.produto.SpringProdutoRepository;
-import com.techchallenge.lanchonete.application.domain.Produto;
-import com.techchallenge.lanchonete.application.mapper.produto.ProdutoEntityMapper;
-import com.techchallenge.lanchonete.application.port.incoming.produto.*;
+import com.techchallenge.lanchonete.infrastructure.persistence.entity.ProdutoEntity;
+import com.techchallenge.lanchonete.infrastructure.persistence.repository.produto.SpringProdutoRepository;
+import com.techchallenge.lanchonete.domain.Produto;
+import com.techchallenge.lanchonete.application.gateways.produto.*;
+import com.techchallenge.lanchonete.infrastructure.mapper.produto.ProdutoEntityMapper;
 
 import java.util.ArrayList;
 import java.util.List;

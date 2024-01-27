@@ -1,10 +1,10 @@
 package com.techchallenge.lanchonete.infrastructure.gateways;
 
-import com.techchallenge.lanchonete.adapters.persistence.entity.CheckoutEntity;
-import com.techchallenge.lanchonete.adapters.persistence.repository.checkout.SpringCheckoutRepository;
-import com.techchallenge.lanchonete.application.domain.Checkout;
-import com.techchallenge.lanchonete.application.mapper.checkout.CheckoutEntityMapper;
-import com.techchallenge.lanchonete.application.port.incoming.checkout.CheckoutUseCase;
+import com.techchallenge.lanchonete.infrastructure.persistence.entity.CheckoutEntity;
+import com.techchallenge.lanchonete.infrastructure.persistence.repository.checkout.SpringCheckoutRepository;
+import com.techchallenge.lanchonete.domain.Checkout;
+import com.techchallenge.lanchonete.infrastructure.mapper.checkout.CheckoutEntityMapper;
+import com.techchallenge.lanchonete.application.gateways.checkout.CheckoutUseCase;
 import jakarta.persistence.EntityManager;
 
 import java.util.Objects;

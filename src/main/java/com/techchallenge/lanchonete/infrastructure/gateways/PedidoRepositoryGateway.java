@@ -1,12 +1,12 @@
 package com.techchallenge.lanchonete.infrastructure.gateways;
 
-import com.techchallenge.lanchonete.adapters.persistence.entity.ClienteEntity;
-import com.techchallenge.lanchonete.adapters.persistence.entity.PedidoEntity;
-import com.techchallenge.lanchonete.adapters.persistence.repository.pedido.SpringPedidoRepository;
-import com.techchallenge.lanchonete.application.domain.Pedido;
-import com.techchallenge.lanchonete.application.mapper.pedido.PedidoEntityMapper;
-import com.techchallenge.lanchonete.application.port.incoming.pedido.CriarPedidoUseCase;
-import com.techchallenge.lanchonete.application.port.incoming.pedido.ListarPedidoUseCase;
+import com.techchallenge.lanchonete.infrastructure.persistence.entity.ClienteEntity;
+import com.techchallenge.lanchonete.infrastructure.persistence.entity.PedidoEntity;
+import com.techchallenge.lanchonete.infrastructure.persistence.repository.pedido.SpringPedidoRepository;
+import com.techchallenge.lanchonete.domain.Pedido;
+import com.techchallenge.lanchonete.infrastructure.mapper.pedido.PedidoEntityMapper;
+import com.techchallenge.lanchonete.application.gateways.pedido.CriarPedidoUseCase;
+import com.techchallenge.lanchonete.application.gateways.pedido.ListarPedidoUseCase;
 import jakarta.persistence.EntityManager;
 
 import java.util.ArrayList;

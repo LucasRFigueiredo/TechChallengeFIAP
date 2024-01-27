@@ -1,11 +1,11 @@
 package com.techchallenge.lanchonete.infrastructure.gateways;
 
-import com.techchallenge.lanchonete.adapters.persistence.entity.ClienteEntity;
-import com.techchallenge.lanchonete.adapters.persistence.repository.cliente.SpringClienteRepository;
-import com.techchallenge.lanchonete.application.domain.Cliente;
-import com.techchallenge.lanchonete.application.mapper.cliente.ClienteEntityMapper;
-import com.techchallenge.lanchonete.application.port.incoming.cliente.BuscarClienteUseCase;
-import com.techchallenge.lanchonete.application.port.incoming.cliente.CriarClienteUseCase;
+import com.techchallenge.lanchonete.infrastructure.persistence.entity.ClienteEntity;
+import com.techchallenge.lanchonete.infrastructure.persistence.repository.cliente.SpringClienteRepository;
+import com.techchallenge.lanchonete.domain.Cliente;
+import com.techchallenge.lanchonete.infrastructure.mapper.cliente.ClienteEntityMapper;
+import com.techchallenge.lanchonete.application.gateways.cliente.BuscarClienteUseCase;
+import com.techchallenge.lanchonete.application.gateways.cliente.CriarClienteUseCase;
 
 public class ClienteRepositoryGateway implements CriarClienteUseCase, BuscarClienteUseCase {
 
