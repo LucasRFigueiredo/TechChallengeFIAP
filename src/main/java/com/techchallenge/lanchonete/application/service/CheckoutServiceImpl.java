@@ -13,12 +13,13 @@ import lombok.AllArgsConstructor;
 import java.math.BigDecimal;
 
 @AllArgsConstructor
-public class CheckoutServiceImpl implements CheckoutUseCase {
+public class CheckoutServiceImpl {
+    private final CheckoutUseCase checkoutUseCase;
     private final CheckoutMapper checkoutMapper;
     private final PedidoRepositoryPort pedidoRepository;
     private final CheckoutRepositoryPort checkoutRepositoryPort;
 
-    @Override
+
     public void criar(Pedido pedido) {
         BigDecimal total = new BigDecimal(0);
         Checkout checkout = new Checkout();
@@ -27,10 +28,10 @@ public class CheckoutServiceImpl implements CheckoutUseCase {
             total = total.add(BigDecimal.valueOf(produto.getPreco()));
         }
         checkout.setTotal(total);
-        checkoutRepositoryPort.salvar(checkout);
+        checkoutUseCase.criar(checkout);
     }
 
-    @Override
+
     public CheckoutDTO buscar(Long id) {
         return checkoutMapper.checkoutToCheckoutDTO(checkoutRepositoryPort.buscar(id));
     }
