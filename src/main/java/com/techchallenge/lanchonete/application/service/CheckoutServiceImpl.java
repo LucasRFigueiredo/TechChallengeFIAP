@@ -7,18 +7,19 @@ import com.techchallenge.lanchonete.application.dto.CheckoutDTO;
 import com.techchallenge.lanchonete.application.mapper.checkout.CheckoutMapper;
 import com.techchallenge.lanchonete.application.port.incoming.checkout.CheckoutUseCase;
 import com.techchallenge.lanchonete.application.port.outgoing.CheckoutRepositoryPort;
-import com.techchallenge.lanchonete.application.port.outgoing.PedidoRepositoryPort;
-import lombok.AllArgsConstructor;
 
 import java.math.BigDecimal;
 
-@AllArgsConstructor
 public class CheckoutServiceImpl {
     private final CheckoutUseCase checkoutUseCase;
     private final CheckoutMapper checkoutMapper;
-    private final PedidoRepositoryPort pedidoRepository;
     private final CheckoutRepositoryPort checkoutRepositoryPort;
 
+    public CheckoutServiceImpl(CheckoutUseCase checkoutUseCase, CheckoutMapper checkoutMapper, CheckoutRepositoryPort checkoutRepositoryPort) {
+        this.checkoutUseCase = checkoutUseCase;
+        this.checkoutMapper = checkoutMapper;
+        this.checkoutRepositoryPort = checkoutRepositoryPort;
+    }
 
     public void criar(Pedido pedido) {
         BigDecimal total = new BigDecimal(0);

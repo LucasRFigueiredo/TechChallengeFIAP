@@ -1,10 +1,11 @@
 package com.techchallenge.lanchonete.adapters.configuration;
 
 import com.techchallenge.lanchonete.LanchoneteApplication;
+import com.techchallenge.lanchonete.adapters.persistence.repository.checkout.SpringCheckoutRepository;
 import com.techchallenge.lanchonete.adapters.persistence.repository.cliente.SpringClienteRepository;
-import com.techchallenge.lanchonete.adapters.persistence.repository.pedido.PedidoRepository;
 import com.techchallenge.lanchonete.adapters.persistence.repository.pedido.SpringPedidoRepository;
 import com.techchallenge.lanchonete.adapters.persistence.repository.produto.SpringProdutoRepository;
+import com.techchallenge.lanchonete.application.mapper.checkout.CheckoutEntityMapper;
 import com.techchallenge.lanchonete.application.mapper.checkout.CheckoutMapper;
 import com.techchallenge.lanchonete.application.mapper.cliente.ClienteEntityMapper;
 import com.techchallenge.lanchonete.application.mapper.cliente.ClienteMapper;
@@ -24,6 +25,7 @@ import com.techchallenge.lanchonete.application.service.CheckoutServiceImpl;
 import com.techchallenge.lanchonete.application.service.ClienteServiceImpl;
 import com.techchallenge.lanchonete.application.service.PedidoServiceImpl;
 import com.techchallenge.lanchonete.application.service.ProdutoServiceImpl;
+import com.techchallenge.lanchonete.infrastructure.gateways.CheckoutRepositoryGateway;
 import com.techchallenge.lanchonete.infrastructure.gateways.ClienteRepositoryGateway;
 import com.techchallenge.lanchonete.infrastructure.gateways.PedidoRepositoryGateway;
 import com.techchallenge.lanchonete.infrastructure.gateways.ProdutoRepositoryGateway;
@@ -104,7 +106,12 @@ public class BeanConfiguration {
     }
 
     @Bean
-    CheckoutUseCase checkoutUseCase(CheckoutMapper checkoutMapper, PedidoRepository pedidoRepository, CheckoutRepositoryPort checkoutRepositoryPort) {
-        return new CheckoutServiceImpl(checkoutMapper, pedidoRepository, checkoutRepositoryPort);
+    CheckoutUseCase checkoutUseCase(SpringCheckoutRepository springCheckoutRepository, CheckoutEntityMapper checkoutEntityMapper, EntityManager entityManager) {
+        return new CheckoutRepositoryGateway(springCheckoutRepository, checkoutEntityMapper, entityManager);
+    }
+
+    @Bean
+    CheckoutServiceImpl checkoutService(CheckoutUseCase checkoutUseCase, CheckoutMapper checkoutMapper, CheckoutRepositoryPort checkoutRepositoryPort) {
+        return new CheckoutServiceImpl(checkoutUseCase, checkoutMapper, checkoutRepositoryPort);
     }
 }
