@@ -5,9 +5,9 @@ import com.techchallenge.lanchonete.infrastructure.mapper.pedido.PedidoEntityMap
 import com.techchallenge.lanchonete.infrastructure.persistence.entity.CheckoutEntity;
 import org.springframework.stereotype.Component;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
-import java.util.stream.Collectors;
 
 @Component
 public class CheckoutEntityMapper {
@@ -46,8 +46,19 @@ public class CheckoutEntityMapper {
     }
 
     public static List<Checkout> checkoutEntitiesToCheckouts(List<CheckoutEntity> checkoutEntities) {
-        return checkoutEntities.stream()
-                .map(CheckoutEntityMapper::checkoutEntityToCheckout)
-                .collect(Collectors.toList());
+        if (!checkoutEntities.isEmpty()) {
+            List<Checkout> checkouts = new ArrayList<>();
+            for (CheckoutEntity checkoutEntity : checkoutEntities) {
+                Checkout checkout = new Checkout();
+                checkout.setId(checkoutEntity.getId());
+                checkout.setPedido(PedidoEntityMapper.pedidoEntityToPedido(checkoutEntity.getPedido()));
+                checkout.setTotal(checkoutEntity.getTotal());
+                checkout.setPagamento(checkoutEntity.getPagamento());
+                checkout.setStatus(checkoutEntity.getStatus());
+                checkouts.add(checkout);
+            }
+            return checkouts;
+        }
+        return null;
     }
 }

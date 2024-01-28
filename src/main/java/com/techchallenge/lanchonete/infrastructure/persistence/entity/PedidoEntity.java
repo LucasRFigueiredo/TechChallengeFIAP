@@ -19,12 +19,12 @@ public class PedidoEntity {
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "ped_seq_gen")
     @SequenceGenerator(name = "ped_seq_gen", sequenceName = "pedido_seq", allocationSize = 1)
     private Long id;
-    @ManyToOne(cascade = CascadeType.PERSIST)
+    @ManyToOne(cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
     @JoinColumn(name = "Cliente_id")
     private ClienteEntity cliente;
     private String status;
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "Pedido_Produto",
             joinColumns = @JoinColumn(name = "Pedido_id"),
             inverseJoinColumns = @JoinColumn(name = "Produto_id"))
