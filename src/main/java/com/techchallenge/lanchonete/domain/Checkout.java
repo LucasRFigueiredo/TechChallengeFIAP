@@ -15,4 +15,6 @@ public class Checkout {
     private Long id;
     private Pedido pedido;
     private BigDecimal total;
+    private String pagamento;
+    private String status;
 }

@@ -1,12 +1,13 @@
 package com.techchallenge.lanchonete.infrastructure.gateways;
 
-import com.techchallenge.lanchonete.infrastructure.persistence.entity.CheckoutEntity;
-import com.techchallenge.lanchonete.infrastructure.persistence.repository.checkout.SpringCheckoutRepository;
+import com.techchallenge.lanchonete.application.gateways.checkout.CheckoutUseCase;
 import com.techchallenge.lanchonete.domain.Checkout;
 import com.techchallenge.lanchonete.infrastructure.mapper.checkout.CheckoutEntityMapper;
-import com.techchallenge.lanchonete.application.gateways.checkout.CheckoutUseCase;
+import com.techchallenge.lanchonete.infrastructure.persistence.entity.CheckoutEntity;
+import com.techchallenge.lanchonete.infrastructure.persistence.repository.checkout.SpringCheckoutRepository;
 import jakarta.persistence.EntityManager;
 
+import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 
@@ -43,5 +44,33 @@ public class CheckoutRepositoryGateway implements CheckoutUseCase {
         } else {
             throw new RuntimeException("Id não encontrado");
         }
+    }
+
+    @Override
+    public void atualizarPagamento(Checkout checkout) {
+        CheckoutEntity checkoutEntityById = springCheckoutRepository.findById(checkout.getId()).get();
+        if (Objects.nonNull(checkoutEntityById)) {
+            CheckoutEntity checkoutEntity = checkoutEntityMapper.updateCheckoutEntityPagamento(checkout, checkoutEntityById);
+            this.springCheckoutRepository.save(checkoutEntity);
+        } else {
+            throw new RuntimeException("Checkout não existe");
+        }
+    }
+
+    @Override
+    public void atualizarStatus(Checkout checkout) {
+        CheckoutEntity checkoutEntityById = springCheckoutRepository.findById(checkout.getId()).get();
+        if (Objects.nonNull(checkoutEntityById)) {
+            CheckoutEntity checkoutEntity = checkoutEntityMapper.updateCheckoutEntityStatus(checkout, checkoutEntityById);
+            this.springCheckoutRepository.save(checkoutEntity);
+        } else {
+            throw new RuntimeException("Checkout não existe");
+        }
+    }
+
+    @Override
+    public List<Checkout> buscarPorStatusPagamento(String status) {
+        List<CheckoutEntity> checkoutEntities = springCheckoutRepository.findByStatusPagamento(status);
+        return checkoutEntityMapper.checkoutEntitiesToCheckouts(checkoutEntities);
     }
 }

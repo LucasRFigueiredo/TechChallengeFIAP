@@ -14,4 +14,6 @@ import java.math.BigDecimal;
 public class CheckoutDTO {
     private PedidoDTO pedido;
     private BigDecimal total;
+    private String pagamento;
+    private String status;
 }

@@ -23,4 +23,6 @@ public class CheckoutEntity {
     @JoinColumn(name = "Pedido_id")
     private PedidoEntity pedido;
     private BigDecimal total;
+    private String pagamento;
+    private String status;
 }

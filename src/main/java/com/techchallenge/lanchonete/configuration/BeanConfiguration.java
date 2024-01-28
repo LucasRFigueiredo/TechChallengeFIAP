@@ -1,11 +1,17 @@
 package com.techchallenge.lanchonete.configuration;
 
 import com.techchallenge.lanchonete.LanchoneteApplication;
-import com.techchallenge.lanchonete.infrastructure.persistence.repository.checkout.SpringCheckoutRepository;
-import com.techchallenge.lanchonete.infrastructure.persistence.repository.cliente.SpringClienteRepository;
-import com.techchallenge.lanchonete.infrastructure.persistence.repository.pedido.SpringPedidoRepository;
-import com.techchallenge.lanchonete.infrastructure.persistence.repository.produto.SpringProdutoRepository;
+import com.techchallenge.lanchonete.application.gateways.checkout.CheckoutUseCase;
+import com.techchallenge.lanchonete.application.gateways.cliente.BuscarClienteUseCase;
+import com.techchallenge.lanchonete.application.gateways.cliente.CriarClienteUseCase;
+import com.techchallenge.lanchonete.application.gateways.pedido.CriarPedidoUseCase;
+import com.techchallenge.lanchonete.application.gateways.pedido.ListarPedidoUseCase;
 import com.techchallenge.lanchonete.application.gateways.produto.*;
+import com.techchallenge.lanchonete.application.usecases.*;
+import com.techchallenge.lanchonete.infrastructure.gateways.CheckoutRepositoryGateway;
+import com.techchallenge.lanchonete.infrastructure.gateways.ClienteRepositoryGateway;
+import com.techchallenge.lanchonete.infrastructure.gateways.PedidoRepositoryGateway;
+import com.techchallenge.lanchonete.infrastructure.gateways.ProdutoRepositoryGateway;
 import com.techchallenge.lanchonete.infrastructure.mapper.checkout.CheckoutEntityMapper;
 import com.techchallenge.lanchonete.infrastructure.mapper.checkout.CheckoutMapper;
 import com.techchallenge.lanchonete.infrastructure.mapper.cliente.ClienteEntityMapper;
@@ -14,19 +20,10 @@ import com.techchallenge.lanchonete.infrastructure.mapper.pedido.PedidoEntityMap
 import com.techchallenge.lanchonete.infrastructure.mapper.pedido.PedidoMapper;
 import com.techchallenge.lanchonete.infrastructure.mapper.produto.ProdutoEntityMapper;
 import com.techchallenge.lanchonete.infrastructure.mapper.produto.ProdutoMapper;
-import com.techchallenge.lanchonete.application.gateways.checkout.CheckoutUseCase;
-import com.techchallenge.lanchonete.application.gateways.cliente.BuscarClienteUseCase;
-import com.techchallenge.lanchonete.application.gateways.cliente.CriarClienteUseCase;
-import com.techchallenge.lanchonete.application.gateways.pedido.CriarPedidoUseCase;
-import com.techchallenge.lanchonete.application.gateways.pedido.ListarPedidoUseCase;
-import com.techchallenge.lanchonete.application.usecases.CheckoutServiceImpl;
-import com.techchallenge.lanchonete.application.usecases.ClienteServiceImpl;
-import com.techchallenge.lanchonete.application.usecases.PedidoServiceImpl;
-import com.techchallenge.lanchonete.application.usecases.ProdutoServiceImpl;
-import com.techchallenge.lanchonete.infrastructure.gateways.CheckoutRepositoryGateway;
-import com.techchallenge.lanchonete.infrastructure.gateways.ClienteRepositoryGateway;
-import com.techchallenge.lanchonete.infrastructure.gateways.PedidoRepositoryGateway;
-import com.techchallenge.lanchonete.infrastructure.gateways.ProdutoRepositoryGateway;
+import com.techchallenge.lanchonete.infrastructure.persistence.repository.checkout.SpringCheckoutRepository;
+import com.techchallenge.lanchonete.infrastructure.persistence.repository.cliente.SpringClienteRepository;
+import com.techchallenge.lanchonete.infrastructure.persistence.repository.pedido.SpringPedidoRepository;
+import com.techchallenge.lanchonete.infrastructure.persistence.repository.produto.SpringProdutoRepository;
 import jakarta.persistence.EntityManager;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
@@ -110,5 +107,10 @@ public class BeanConfiguration {
     @Bean
     CheckoutServiceImpl checkoutService(CheckoutUseCase checkoutUseCase, CheckoutMapper checkoutMapper) {
         return new CheckoutServiceImpl(checkoutUseCase, checkoutMapper);
+    }
+
+    @Bean
+    PagamentoServiceImpl pagamentoService(CheckoutUseCase checkoutUseCase) {
+        return new PagamentoServiceImpl(checkoutUseCase);
     }
 }
