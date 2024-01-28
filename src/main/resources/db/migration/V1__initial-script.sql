@@ -30,6 +30,8 @@ CREATE TABLE Checkout (
     id SERIAL PRIMARY KEY,
     Pedido_id BIGINT,
     total DECIMAL(10, 2),
+    pagamento VARCHAR(255),
+    status VARCHAR(255),
     FOREIGN KEY (Pedido_id) REFERENCES Pedido(id)
 );
 
