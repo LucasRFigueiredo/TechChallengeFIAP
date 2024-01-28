@@ -8,6 +8,7 @@ import com.techchallenge.lanchonete.application.gateways.pedido.CriarPedidoUseCa
 import com.techchallenge.lanchonete.application.gateways.pedido.ListarPedidoUseCase;
 import com.techchallenge.lanchonete.application.gateways.produto.*;
 import com.techchallenge.lanchonete.application.usecases.*;
+import com.techchallenge.lanchonete.infrastructure.Scheduler;
 import com.techchallenge.lanchonete.infrastructure.gateways.CheckoutRepositoryGateway;
 import com.techchallenge.lanchonete.infrastructure.gateways.ClienteRepositoryGateway;
 import com.techchallenge.lanchonete.infrastructure.gateways.PedidoRepositoryGateway;
@@ -116,9 +117,14 @@ public class BeanConfiguration {
     }
 
     @Bean
-    public CommandLineRunner init(CheckoutServiceImpl checkoutService) {
+    Scheduler scheduler(CheckoutUseCase checkoutUseCase) {
+        return new Scheduler(checkoutUseCase);
+    }
+
+    @Bean
+    public CommandLineRunner init(Scheduler scheduler) {
         return args -> {
-            checkoutService.iniciarTarefaAtualizacaoStatus();
+            scheduler.iniciarTarefaAtualizacaoStatus();
         };
     }
 }

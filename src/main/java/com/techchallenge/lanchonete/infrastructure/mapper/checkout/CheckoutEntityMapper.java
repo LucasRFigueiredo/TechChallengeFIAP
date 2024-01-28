@@ -23,6 +23,7 @@ public class CheckoutEntityMapper {
 
     public static Checkout checkoutEntityToCheckout(CheckoutEntity checkoutEntity) {
         Checkout checkout = new Checkout();
+        checkout.setId(checkoutEntity.getId());
         checkout.setPedido(PedidoEntityMapper.pedidoEntityToPedido(checkoutEntity.getPedido()));
         checkout.setTotal(checkoutEntity.getTotal());
         checkout.setId(checkoutEntity.getId());

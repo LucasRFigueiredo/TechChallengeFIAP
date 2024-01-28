@@ -8,10 +8,9 @@ import com.techchallenge.lanchonete.domain.Produto;
 import com.techchallenge.lanchonete.infrastructure.mapper.checkout.CheckoutMapper;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
-import java.util.concurrent.Executors;
-import java.util.concurrent.ScheduledExecutorService;
-import java.util.concurrent.TimeUnit;
 
 public class CheckoutServiceImpl {
     private final CheckoutUseCase checkoutUseCase;
@@ -36,29 +35,15 @@ public class CheckoutServiceImpl {
     }
 
 
-    public CheckoutDTO buscar(Long id) {
-        return checkoutMapper.checkoutToCheckoutDTO(checkoutUseCase.buscar(id));
-    }
-
-    public void iniciarTarefaAtualizacaoStatus() {
-        ScheduledExecutorService scheduler = Executors.newSingleThreadScheduledExecutor();
-
-        scheduler.scheduleAtFixedRate(() -> {
-            System.out.println("Executando tarefa de atualização de status...");
-            atualizarStatus();
-        }, 0, 1, TimeUnit.MINUTES);
-    }
-
-    private void atualizarStatus() {
-        List<Checkout> checkoutsAprovados = checkoutUseCase.buscarPorStatusPagamento("Aprovado");
-        for (Checkout checkout : checkoutsAprovados) {
-            String statusAtual = checkout.getStatus();
-            if ("Em preparação".equals(statusAtual)) {
-                checkout.setStatus("Pronto");
-            } else if ("Aguardando pagamento".equals(statusAtual)) {
-                checkout.setStatus("Em preparação");
+    public List<CheckoutDTO> buscar() {
+        List<Checkout> checkouts = checkoutUseCase.listar();
+        if (!checkouts.isEmpty()) {
+            List<CheckoutDTO> checkoutDTOS = new ArrayList<>();
+            for (Checkout checkout : checkouts) {
+                checkoutDTOS.add(checkoutMapper.checkoutToCheckoutDTO(checkout));
             }
-            checkoutUseCase.atualizarStatus(checkout);
+            return checkoutDTOS;
         }
+        return Collections.emptyList();
     }
 }

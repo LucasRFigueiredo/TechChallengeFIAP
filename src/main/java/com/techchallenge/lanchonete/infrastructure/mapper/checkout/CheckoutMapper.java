@@ -9,6 +9,7 @@ import org.springframework.stereotype.Component;
 public class CheckoutMapper {
     public static CheckoutDTO checkoutToCheckoutDTO(Checkout checkout) {
         CheckoutDTO checkoutDTO = new CheckoutDTO();
+        checkoutDTO.setId(checkout.getId());
         checkoutDTO.setPedido(PedidoMapper.pedidoToPedidoDTO(checkout.getPedido()));
         checkoutDTO.setTotal(checkout.getTotal());
         checkoutDTO.setPagamento(checkout.getPagamento());

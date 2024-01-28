@@ -12,6 +12,7 @@ import java.math.BigDecimal;
 @AllArgsConstructor
 @NoArgsConstructor
 public class CheckoutDTO {
+    private Long id;
     private PedidoDTO pedido;
     private BigDecimal total;
     private String pagamento;

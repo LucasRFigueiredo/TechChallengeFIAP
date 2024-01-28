@@ -7,6 +7,8 @@ import java.util.List;
 public interface CheckoutUseCase {
     void criar(Checkout checkout);
 
+    List<Checkout> listar();
+
     Checkout buscar(Long id);
 
     void atualizarPagamento(Checkout checkout);

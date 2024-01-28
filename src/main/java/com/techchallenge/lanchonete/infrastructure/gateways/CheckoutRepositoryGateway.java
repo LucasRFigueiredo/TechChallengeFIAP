@@ -7,6 +7,7 @@ import com.techchallenge.lanchonete.infrastructure.persistence.entity.CheckoutEn
 import com.techchallenge.lanchonete.infrastructure.persistence.repository.checkout.SpringCheckoutRepository;
 import jakarta.persistence.EntityManager;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
@@ -34,6 +35,22 @@ public class CheckoutRepositoryGateway implements CheckoutUseCase {
         checkoutEntity.setPedido(entityManager.merge(checkoutEntity.getPedido()));
         checkoutEntity = entityManager.merge(checkoutEntity);
         this.springCheckoutRepository.save(checkoutEntity);
+    }
+
+    @Override
+    public List<Checkout> listar() {
+        List<CheckoutEntity> checkoutEntities = springCheckoutRepository.findAll();
+        if (!checkoutEntities.isEmpty()) {
+            List<Checkout> checkouts = new ArrayList<>();
+            for (CheckoutEntity checkoutEntity : checkoutEntities) {
+                if (!checkoutEntity.getStatus().equals("Pronto")) {
+                    checkouts.add(checkoutEntityMapper.checkoutEntityToCheckout(checkoutEntity));
+                }
+            }
+            return checkouts;
+        } else {
+            throw new RuntimeException("Id não encontrado");
+        }
     }
 
     @Override
