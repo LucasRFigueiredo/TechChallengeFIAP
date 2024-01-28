@@ -25,6 +25,7 @@ import com.techchallenge.lanchonete.infrastructure.persistence.repository.client
 import com.techchallenge.lanchonete.infrastructure.persistence.repository.pedido.SpringPedidoRepository;
 import com.techchallenge.lanchonete.infrastructure.persistence.repository.produto.SpringProdutoRepository;
 import jakarta.persistence.EntityManager;
+import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
@@ -112,5 +113,12 @@ public class BeanConfiguration {
     @Bean
     PagamentoServiceImpl pagamentoService(CheckoutUseCase checkoutUseCase) {
         return new PagamentoServiceImpl(checkoutUseCase);
+    }
+
+    @Bean
+    public CommandLineRunner init(CheckoutServiceImpl checkoutService) {
+        return args -> {
+            checkoutService.iniciarTarefaAtualizacaoStatus();
+        };
     }
 }

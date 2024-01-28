@@ -20,7 +20,6 @@ public class CheckoutServiceImpl {
     public CheckoutServiceImpl(CheckoutUseCase checkoutUseCase, CheckoutMapper checkoutMapper) {
         this.checkoutUseCase = checkoutUseCase;
         this.checkoutMapper = checkoutMapper;
-        //iniciarTarefaAtualizacaoStatus();
     }
 
     public void criar(Pedido pedido) {
@@ -34,7 +33,6 @@ public class CheckoutServiceImpl {
         checkout.setPagamento("Aguardando pagamento");
         checkout.setStatus("Aguardando pagamento");
         checkoutUseCase.criar(checkout);
-        iniciarTarefaAtualizacaoStatus();
     }
 
 
@@ -42,7 +40,7 @@ public class CheckoutServiceImpl {
         return checkoutMapper.checkoutToCheckoutDTO(checkoutUseCase.buscar(id));
     }
 
-    private void iniciarTarefaAtualizacaoStatus() {
+    public void iniciarTarefaAtualizacaoStatus() {
         ScheduledExecutorService scheduler = Executors.newSingleThreadScheduledExecutor();
 
         scheduler.scheduleAtFixedRate(() -> {
@@ -53,10 +51,8 @@ public class CheckoutServiceImpl {
 
     private void atualizarStatus() {
         List<Checkout> checkoutsAprovados = checkoutUseCase.buscarPorStatusPagamento("Aprovado");
-        System.out.println("to aqui");
         for (Checkout checkout : checkoutsAprovados) {
             String statusAtual = checkout.getStatus();
-
             if ("Em preparação".equals(statusAtual)) {
                 checkout.setStatus("Pronto");
             } else if ("Aguardando pagamento".equals(statusAtual)) {
