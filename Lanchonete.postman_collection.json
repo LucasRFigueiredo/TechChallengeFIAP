@@ -103,6 +103,27 @@
 						"url": "localhost:8080/produtos"
 					},
 					"response": []
+				},
+				{
+					"name": "Busca produto por tipo",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"tipo\": \"Fast-food\",\r\n    \"nome\": \"Hambúrguer\",\r\n    \"descricao\": \"Um hambúrguer delicioso\",\r\n    \"preco\": 6.99\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "localhost:8080/produtos/Fast-food"
+					},
+					"response": []
 				}
 			]
 		},
@@ -135,27 +156,6 @@
 						"url": "localhost:8080/pedidos"
 					},
 					"response": []
-				},
-				{
-					"name": "Busca produto por tipo",
-					"protocolProfileBehavior": {
-						"disableBodyPruning": true
-					},
-					"request": {
-						"method": "GET",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"tipo\": \"Fast-food\",\r\n    \"nome\": \"Hambúrguer\",\r\n    \"descricao\": \"Um hambúrguer delicioso\",\r\n    \"preco\": 6.99\r\n}\r\n",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": "localhost:8080/produtos/Fast-food"
-					},
-					"response": []
 				}
 			]
 		},
@@ -180,6 +180,27 @@
 							}
 						},
 						"url": "localhost:8080/checkout/1"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Pagamento",
+			"item": [
+				{
+					"name": "Aprovar pagamento",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				},
+				{
+					"name": "Reprovar pagamento",
+					"request": {
+						"method": "GET",
+						"header": []
 					},
 					"response": []
 				}

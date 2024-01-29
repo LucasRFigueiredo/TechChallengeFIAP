@@ -1,20 +1,19 @@
-package com.techchallenge.lanchonete.application.dto;
+package com.techchallenge.lanchonete.domain;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.math.BigDecimal;
+import java.util.List;
 
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class CheckoutDTO {
+public class Pedido {
     private Long id;
-    private PedidoDTO pedido;
-    private BigDecimal total;
-    private String pagamento;
+    private Cliente cliente;
     private String status;
+    private List<Produto> itens;
 }
