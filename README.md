@@ -16,7 +16,19 @@ faça o clone do projeto https://github.com/LucasRFigueiredo/TechChallengeFIAP.g
 
 após fazer o clone, vá ate a pasta e execute o comando 
 
-####docker-compose up --build
+```
+docker-compose up --build
+```
+
+depois de fazer o docker-compose, execute o seguinte comando para subir o k8
+
+```
+kubectl apply -f postgres-deployment-service.yaml
+```
+
+```
+kubectl apply -f lanchonete-deployment-service.yaml
+```
 
 e para fazer as requests seguir as colections na raiz do projeto
 
