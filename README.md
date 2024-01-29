@@ -92,6 +92,12 @@ Este projeto foi desenvolvido utilizando as seguintes tecnologias e conceitos:
 </div>
 
 
+### Arquitetura 
+<div align="center">
+  <img src="./pos_arquitetura.drawio-aws.png" alt="Arquitetura" />
+</div>
+
+
 ## 📝 License
 
 This project is licensed under the MIT License. For more information, please refer to the [LICENSE](LICENSE.md) file.
