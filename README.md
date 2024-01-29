@@ -97,6 +97,9 @@ Este projeto foi desenvolvido utilizando as seguintes tecnologias e conceitos:
   <img src="./pos_arquitetura.drawio-aws.png" alt="Arquitetura" />
 </div>
 
+### Video de explicação
+
+https://vimeo.com/907502067
 
 ## 📝 License
 
