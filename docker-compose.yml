@@ -16,12 +16,27 @@ services:
     #volumes:
     #  - ./db/data :/postgresql/data
 
+  rabbitmq:
+    image: rabbitmq:3-management
+    container_name: rabbitmq
+    restart: unless-stopped
+    tty: true
+    ports:
+      - "5672:5672"   # Porta padrão do RabbitMQ
+      - "15672:15672" # Porta da interface de gerenciamento
+    networks:
+      - lanchonete-network
+    environment:
+      RABBITMQ_DEFAULT_USER: guest
+      RABBITMQ_DEFAULT_PASS: guest
+
   lanchonete:
     build: .
     ports:
       - "8080:8080"
     depends_on:
       - postgres
+      - rabbitmq
     networks:
       - lanchonete-network
 
