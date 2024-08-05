@@ -23,6 +23,4 @@ public class ClienteEntity {
     private String nome;
     private String cpf;
     private String email;
-    @OneToMany(mappedBy = "cliente", cascade = CascadeType.ALL)
-    private List<PedidoEntity> pedidos;
 }
