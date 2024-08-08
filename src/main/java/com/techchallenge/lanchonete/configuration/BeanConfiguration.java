@@ -4,6 +4,8 @@ import com.techchallenge.lanchonete.LanchoneteApplication;
 import com.techchallenge.lanchonete.application.events.EventPublisher;
 import com.techchallenge.lanchonete.application.gateways.cliente.BuscarClienteUseCase;
 import com.techchallenge.lanchonete.application.gateways.cliente.CriarClienteUseCase;
+import com.techchallenge.lanchonete.application.gateways.cliente.AtualizarClienteUseCase;
+import com.techchallenge.lanchonete.application.gateways.cliente.DeletarClienteUseCase;
 import com.techchallenge.lanchonete.application.usecases.ClienteServiceImpl;
 import com.techchallenge.lanchonete.infrastructure.gateways.ClienteRepositoryGateway;
 import com.techchallenge.lanchonete.infrastructure.mapper.cliente.ClienteEntityMapper;
@@ -20,20 +22,36 @@ public class BeanConfiguration {
     @Bean
     public ClienteServiceImpl clienteService(CriarClienteUseCase criarClienteUseCase,
                                              BuscarClienteUseCase buscarClienteUseCase,
+                                             AtualizarClienteUseCase atualizarClienteUseCase,
+                                             DeletarClienteUseCase deletarClienteUseCase,
                                              ClienteMapper clienteMapper,
                                              EventPublisher eventPublisher) {
-        return new ClienteServiceImpl(criarClienteUseCase, buscarClienteUseCase, clienteMapper, eventPublisher);
+        return new ClienteServiceImpl(criarClienteUseCase, buscarClienteUseCase, atualizarClienteUseCase, deletarClienteUseCase, clienteMapper, eventPublisher);
     }
 
     @Bean
-    CriarClienteUseCase criarClienteUseCase(SpringClienteRepository springClienteRepository,
-                                            ClienteEntityMapper clienteEntityMapper) {
+    public ClienteRepositoryGateway clienteRepositoryGateway(SpringClienteRepository springClienteRepository,
+                                                             ClienteEntityMapper clienteEntityMapper) {
         return new ClienteRepositoryGateway(springClienteRepository, clienteEntityMapper);
     }
 
     @Bean
-    BuscarClienteUseCase buscarClienteUseCase(SpringClienteRepository springClienteRepository,
-                                              ClienteEntityMapper clienteEntityMapper) {
-        return new ClienteRepositoryGateway(springClienteRepository, clienteEntityMapper);
+    public CriarClienteUseCase criarClienteUseCase(ClienteRepositoryGateway clienteRepositoryGateway) {
+        return clienteRepositoryGateway;
+    }
+
+    @Bean
+    public BuscarClienteUseCase buscarClienteUseCase(ClienteRepositoryGateway clienteRepositoryGateway) {
+        return clienteRepositoryGateway;
+    }
+
+    @Bean
+    public AtualizarClienteUseCase atualizarClienteUseCase(ClienteRepositoryGateway clienteRepositoryGateway) {
+        return clienteRepositoryGateway;
+    }
+
+    @Bean
+    public DeletarClienteUseCase deletarClienteUseCase(ClienteRepositoryGateway clienteRepositoryGateway) {
+        return clienteRepositoryGateway;
     }
 }
